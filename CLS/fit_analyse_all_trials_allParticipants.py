@@ -78,7 +78,8 @@ def nrmse(predictions, targets):
     return np.sqrt(((predictions - targets) ** 2).mean())/len(targets)
 
 
-#%% ----------------------------Class to parse XML and import blocks obj-------------
+#%% 
+# Class to parse XML and import blocks obj-------------
 blockFromCls = parseXML.Cls2dic()
 CLSs=[] 
 
@@ -93,7 +94,8 @@ for ID in participantIDs:
     CLSs[-1]['Blocks']=blocks  
     print("-----> xml data parsed:", str(file_name))
 
-# %% ---------------------------Perform all the fit----------------------------------
+# %% 
+# Perform all the fit----------------------------------
 
 # min_methods=['MAT','NEL','CG','SLS','TRU']
 # min_methods=['NEL','CG','SLS','TRU']
@@ -115,7 +117,8 @@ for CLS in CLSs:
 
                 print(min_method + '_' + fit_method + ': ' + str(fit)) 
                 block[min_method + '_' + fit_method]=fit
-# %%----------------------------Compute pwlf Bz and RSME-----------
+# %%
+# Compute pwlf Bz and RSME--------------------------
 # min_methods=['MAT','NEL','CG','SLS','TRU']
 # min_methods=['NEL','CG','SLS','TRU']
 # min_methods=['NEL']
@@ -193,7 +196,8 @@ for CLS in CLSs:
 
 
 
-#%%----------plot min_methods for each block 
+#%%
+# Plot min_methods for each block--------------------------------------------------------
 
 # min_methods=['MAT','NEL','CG','SLS','TRU']
 # min_methods=['NEL']
