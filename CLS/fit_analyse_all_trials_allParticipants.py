@@ -463,6 +463,7 @@ for CLS in CLSs:
 
 #Can BTUX be refited???????? it seems it can. it implements rules for when data above 35CU is missing
 
+# Load the max level or ULL and display on plots 
 # %%
 # look at difference between binaural and mono 
 # plot participant data

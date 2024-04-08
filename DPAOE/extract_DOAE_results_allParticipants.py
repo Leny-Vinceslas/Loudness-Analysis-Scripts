@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib as matplotlib
 import os
 import pwlf
+import re
 
 def dB2Pa(dB):
     Paref=0.00002
@@ -17,30 +18,47 @@ def Pa2dB(Pa):
 def nrmse(predictions, targets):
     return np.sqrt(((predictions - targets) ** 2).mean())/len(targets)
 
-work_path=os.getcwd()
-csv_path=work_path+"\\csv_data" 
+# work_path=os.getcwd()
+# csv_path=work_path+"\\csv_data" 
 
-# participantID='3634'
-participantIDs=['6915','3634']
-tests=['DP','GR']
-grFreqs=['1414','4242']
-sides=['L','R']
+#%%
+# Find all OAE files ---------------------------------------------
+directory_path = os.getcwd()+'\\'
+extension = ".csv"
+# name_pattern = r'DP||GR'  # Pattern for file name matching
+name_pattern =r'(DP|GR)_\w+_(\d{4})\.csv'  
+matched_files = []
+IDs=[]
 
-DP_file_names=[]
-GR_file_names=[]
-for ID in participantIDs:
-    for test in tests:
-        for side in sides:
-            if test=='GR':
-                for ff in grFreqs:
-                    GR_file_names.append(test+'_'+side+'_'+ff+'_'+ID+'.csv')
-            else:
-                DP_file_names.append(test+'_'+side+'_'+ID+'.csv')
+for root, _, files in os.walk(directory_path):
+    
+    for file in files:
+        if file.endswith(extension) and re.match(name_pattern, file):
+            matched_files.append(os.path.join(root, file))
 
-#%% read dpGram data
+matched_files
 
-# df={}
-DP_data=[]
+        
+ID_pattern = r'(\d{4})\.csv$'
+
+# List to store extracted IDs
+
+# Iterate over file paths
+for matched_file in matched_files:
+    # Search for pattern in each file path
+    match = re.search(ID_pattern, matched_file)
+    if match:
+        ID = match.group(1)
+        if ID not in IDs:
+            IDs.append(ID)
+
+participantIDs=IDs
+# Print the extracted IDs
+print("IDs in the list:")
+print(IDs)
+
+#%%
+# read dpGram data -------------------------------------------
 OAEs=[]
 for ID in participantIDs:
     DP_data=[]
@@ -48,60 +66,57 @@ for ID in participantIDs:
     OAEs.append({})
     OAEs[-1]['ID']=ID
     
-    for DP_file in DP_file_names:
-        if DP_file.find(ID) <0:
-            data=pd.read_csv(csv_path+'\\'+DP_file)  
-
-            df = pd.DataFrame(data)
-
-            data={}
-            data['ID']=ID
-            data['side']=DP_file[3]
-            data['f']=df['Freq (Hz)']
-            data['f1']=df['F1 (dB)']
-            data['f2']=df['F2 (dB)']	
-            data['dp']=df['DP (dB)']	
-            data['noise2']=df['Noise+2sd (dB)']	
-            data['noise1']=df['Noise+1sd (dB)']
-            data['f22_1']=df['2F2-F1 (dB)']
-            data['f31_22']=df['3F1-2F2 (dB)']	
-            data['f32_21']=df['3F2-2F1 (dB)']	
-            data['f41_32']=df['4F1-3F2 (dB)']
-            data['pdsnr']=df['DP (dB)']-df['Noise+1sd (dB)']
-        
-            DP_data.append(data)
-    OAEs[-1]['DP']=DP_data  
-    
-    for GR_file in GR_file_names:
-        if GR_file.find(ID) <0:
-            data=pd.read_csv(csv_path+'\\'+GR_file)  
-
-            df = pd.DataFrame(data)
-
-            data={}
-            data['ID']=ID
-            data['side']=GR_file[3]
-            data['f']=df['Freq (Hz)']
-            data['f1']=df['F1 (dB)']
-            data['f2']=df['F2 (dB)']	
-            data['dp']=df['DP (dB)']	
-            data['noise2']=df['Noise+2sd (dB)']	
-            data['noise1']=df['Noise+1sd (dB)']
-            data['f22_1']=df['2F2-F1 (dB)']
-            data['f31_22']=df['3F1-2F2 (dB)']	
-            data['f32_21']=df['3F2-2F1 (dB)']	
-            data['f41_32']=df['4F1-3F2 (dB)']
-            data['pdsnr']=df['DP (dB)']-df['Noise+1sd (dB)']
+    for file in matched_files:
+        if re.search(rf'\w+_{ID}\.csv' , os.path.basename(file)):
+            match=re.match(r'(\w{2})_\w+_(\d{4})\.csv' , os.path.basename(file))
+            if match.group(1)=='DP':
+                # data=pd.read_csv(file)  
+                df = pd.DataFrame(pd.read_csv(file))
+                data={}
+                data['ID']=ID
+                data['side']=match.group(2)
+                data['f']=df['Freq (Hz)']
+                data['f1']=df['F1 (dB)']
+                data['f2']=df['F2 (dB)']	
+                data['dp']=df['DP (dB)']	
+                data['noise2']=df['Noise+2sd (dB)']	
+                data['noise1']=df['Noise+1sd (dB)']
+                data['f22_1']=df['2F2-F1 (dB)']
+                data['f31_22']=df['3F1-2F2 (dB)']	
+                data['f32_21']=df['3F2-2F1 (dB)']	
+                data['f41_32']=df['4F1-3F2 (dB)']
+                data['pdsnr']=df['DP (dB)']-df['Noise+1sd (dB)']
             
-            GR_data.append(data)
+                DP_data.append(data)
+                
+            if match.group(1)=='GR':
+                df = pd.DataFrame(pd.read_csv(file))
+                data={}
+                data['ID']=ID
+                match=re.match(r'(\w{2})_(\w)_(\w{4})_(\d{4})\.csv' , os.path.basename(file))
+                data['side']=match.group(2)
+                data['f']=df['Freq (Hz)']
+                data['f1']=df['F1 (dB)']
+                data['f2']=df['F2 (dB)']	
+                data['dp']=df['DP (dB)']	
+                data['noise2']=df['Noise+2sd (dB)']	
+                data['noise1']=df['Noise+1sd (dB)']
+                data['f22_1']=df['2F2-F1 (dB)']
+                data['f31_22']=df['3F1-2F2 (dB)']	
+                data['f32_21']=df['3F2-2F1 (dB)']	
+                data['f41_32']=df['4F1-3F2 (dB)']
+                data['pdsnr']=df['DP (dB)']-df['Noise+1sd (dB)']
+                
+                GR_data.append(data)
+                
     OAEs[-1]['GR']=GR_data
+    OAEs[-1]['DP']=DP_data  
+                
+
+# %% 
+# Plot DPGRAM -----------------------------------------
 
 
-
-# %% Plot DPGRAM
-
-# plt.figure()
-# plt.figure(figsize=(15, 5))
 colors=plt.rcParams['axes.prop_cycle'].by_key()['color']
 colors.insert(1,colors[3]) 
 for OAE in OAEs:
@@ -124,24 +139,9 @@ for OAE in OAEs:
         ax.set_ylim(ylim[0], ylim[1])
         plt.legend()
 
-    # plt.figure()
-    # for ii, side in enumerate(sides):
 
-    #     plt.plot(DP_data[ii]['f'], DP_data[ii]['dp'],'o-',label='DP '+side)
-    #     # plt.plot(DP_data[ii]['f'], DP_data[ii]['noise1'],'o-',label='Noise+1sd')
-    #     # plt.plot(DP_data[ii]['f'], DP_data[ii]['noise2'],'o-',label='Noise+2sd')
-
-    # plt.grid('DPOAE, side: L+R')
-    # plt.title('')
-    # plt.xlabel('Frequency [Hz]')
-    # plt.ylabel('DP Level [dB SPL]')
-    # plt.xscale('log')
-    # plt.xticks(np.array([1, 2, 3, 4,5,6,7,8])*1000,['1', '2', '3', '4','5','6','7','8'])
-    # # plt.xticklabels(['1', '2', '3', '4','5','6','7'])
-    # plt.legend()
-    # plt.grid(True, which="both")
-
-#%%--------------------------------- Compute fittings 
+#%%
+# Compute fittings --------------------------------- 
 # look at guinan and backus paper about DPgrowth function for fitting 
 # OAEuPa=slope(l2-L2interscept)
 # Pref = 20 microPascals
