@@ -23,9 +23,9 @@ def nrmse(predictions, targets):
 
 #%%
 # Find all OAE files ---------------------------------------------
-directory_path = os.getcwd()+'\\'
+# directory_path = os.getcwd()+'\\'
+directory_path = 'c:\\Users\\lenyv\\OneDrive - University College London\\UCL\\Hyperacusis-project\\Python\\Loudness Analysis Scripts\\Participants\\'
 extension = ".csv"
-# name_pattern = r'DP||GR'  # Pattern for file name matching
 name_pattern =r'(DP|GR)_\w+_(\d{4})\.csv'  
 matched_files = []
 IDs=[]
@@ -36,9 +36,6 @@ for root, _, files in os.walk(directory_path):
         if file.endswith(extension) and re.match(name_pattern, file):
             matched_files.append(os.path.join(root, file))
 
-matched_files
-
-        
 ID_pattern = r'(\d{4})\.csv$'
 
 # List to store extracted IDs
@@ -204,10 +201,8 @@ for OAE in OAEs:
         pwlf_error=nrmse(my_pwlf.predict(GR['f2']),GR['dp'])
         slope_error=nrmse(m*GR['f2']+b,GR['dp'])
 
-#%%---------------------------- plot DP Growth Function
-
-
-
+#%%
+# plot DP Growth Function ---------------------------- 
 
 for OAE in OAEs:
     plt.figure(figsize=(15, 10))
@@ -260,7 +255,10 @@ for OAE in OAEs:
                  GR['f2']+GR['slope'][1],'--',label='slope: '+ format(GR['slope'][0]*10**6,'.2f'))
         ax.plot(GR['fit'][0],GR['fit'][1],'--',label='PWLF: ' + format(GR['slopeValFit'][1]*10**6,'.2f'))
         # ax.set_xlim(xmin, xmax)
-        # ax.set_ylim(-.5*10**-5, 20*10**-5) 
+        if GR['f'][0] < 2000:
+            ax.set_ylim(-.5*10**-5, 20*10**-5) 
+        else:
+            ax.set_ylim(-.5*10**-5, 20*10**-5) 
         ax.set_title(' DP I/O [µPa]. ID:'+GR['ID']+ ', '+str(GR['f'][0])+ ' Hz, side: '+GR['side'])
         ax.set_xlabel('L2 level [dB SPL]')
         ax.set_ylabel('DP [µPa]')

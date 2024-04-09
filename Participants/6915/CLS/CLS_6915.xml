@@ -1,0 +1,1043 @@
+<XML HtShellXmlFormat="ShsHeader">
+  <Value Name="ID" Value="{6544F9C9-9C6F-4717-861E-2922DA81077B}" Comment=""/>
+  <Value Name="USERID" Value="Auritec" Comment=""/>
+  <Value Name="CLIENTID" Value="000dd2fe-1792-4a8b-921d-9883362d6d80" Comment=""/>
+  <Value Name="MEASUREMENTID" Value="KLS" Comment=""/>
+  <Value Name="MEASUREMENTPROFILEID" Value="{826E1217-9844-4F52-B374-5D329566B4A6}" Comment=""/>
+  <Value Name="MEASUREMENTPROFILENAME" Value="Headphones, broadband, binaural (26/03) 4 blocks" Comment=""/>
+  <Value Name="MEASUREMENTDATE" Value="2024 03 2 26 16 14 51 0000" Comment=""/>
+  <Value Name="MEASUREMENTSTATUS" Value="COMPLETE" Comment=""/>
+  <Subheader Name="MEASUREMENTRESULT" Comment="">
+    <Subheader Name="Signals" Comment="">
+      <Subheader Name="QueryGroupSignals" Comment="">
+        <Value Name="" Value="search signal header ${DestinationHeader} where 'SignalInfo/GroupId contains thirdoctave_lnn_kls_1'" Comment=""/>
+      </Subheader>
+      <Subheader Name="QuerySingleSignals" Comment="">
+        <Value Name="" Value="search signal header ${DestinationHeader} where 'SignalInfo/Keywords contains noise'" Comment=""/>
+      </Subheader>
+    </Subheader>
+    <Value Name="TransducerType" Value="headphone" Comment=""/>
+    <Value Name="LevelControl" Value="Adaptive" Comment=""/>
+    <Value Name="LevelUnit" Value="SPL" Comment=""/>
+    <Value Name="SignalGroup" Value="_KLS_SIGNALS_SINGLE_" Comment=""/>
+    <Value Name="DefaultType" Value="binaural" Comment=""/>
+    <Value Name="R&amp;D" Value="0" Comment=""/>
+    <Value Name="ReferenceDataVersion" Value="1" Comment=""/>
+    <Subheader Name="Scripts" Comment="">
+      <Subheader Name="TargetSetup" Comment=""/>
+      <Subheader Name="InitHardware" Comment=""/>
+      <Subheader Name="Measurement" Comment=""/>
+      <Subheader Name="Trial" Comment=""/>
+      <Subheader Name="AudiometerCommit" Comment=""/>
+      <Subheader Name="Presentation" Comment=""/>
+      <Subheader Name="ExitHardware" Comment=""/>
+    </Subheader>
+    <Value Name="GroupShuffle" Value="none" Comment=""/>
+    <Value Name="BlockShuffle" Value="user" Comment=""/>
+    <Value Name="MeasurementId" Value="KLS" Comment=""/>
+    <Value Name="InterStimulusPause" Value="500" Comment=""/>
+    <Value Name="NonAdaptiveMinLevel" Value="10" Comment=""/>
+    <Value Name="NonAdaptiveMaxLevel" Value="100" Comment=""/>
+    <Value Name="NonAdaptiveIntervals" Value="9" Comment=""/>
+    <Value Name="NonAdaptiveRepetitions" Value="1" Comment=""/>
+    <Subheader Name="BlockGroups" Comment="">
+      <Subheader Name="" Comment="">
+        <Value Name="GroupId" Value="{FE4E3020-13E7-4BF6-A7BA-60DCA31616D8}" Comment=""/>
+        <Value Name="SignalGroup" Value="_KLS_SIGNALS_SINGLE_" Comment=""/>
+        <Value Name="LevelUnit" Value="SPL" Comment=""/>
+        <Value Name="ChannelLevels" Value="0 0" Comment=""/>
+        <Value Name="AdaptiveMaxLevel" Value="95" Comment=""/>
+        <Subheader Name="Blocks" Comment="">
+          <Subheader Name="" Comment="">
+            <Value Name="Signal" Value="id engmatrixnoise" Comment=""/>
+            <Value Name="Enabled" Value="1" Comment=""/>
+            <Value Name="CalibrationReference" Value="engmatrixnoise" Comment=""/>
+            <Value Name="Status" Value="done" Comment=""/>
+            <Value Name="Repetitions" Value="0" Comment=""/>
+            <Value Name="SignalLength" Value="1000" Comment=""/>
+            <Value Name="RampLength" Value="50" Comment=""/>
+            <Value Name="LevelOffset" Value="0" Comment=""/>
+            <Value Name="TrialsTotal" Value="18" Comment=""/>
+            <Value Name="TrialsDone" Value="18" Comment=""/>
+            <Subheader Name="Trials" Comment="">
+              <Subheader Name="" Comment="">
+                <Value Name="Level" Value="75" Comment=""/>
+                <Value Name="CU" Value="30" Comment=""/>
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="LevelSPL" Value="75" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="85" Comment=""/>
+                <Value Name="CU" Value="40" Comment=""/>
+                <Value Name="LevelSPL" Value="85" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="60" Comment=""/>
+                <Value Name="CU" Value="20" Comment=""/>
+                <Value Name="LevelSPL" Value="60" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="95" Comment=""/>
+                <Value Name="CU" Value="50" Comment=""/>
+                <Value Name="LevelSPL" Value="95" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="45" Comment=""/>
+                <Value Name="CU" Value="15" Comment=""/>
+                <Value Name="LevelSPL" Value="45" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="30" Comment=""/>
+                <Value Name="CU" Value="10" Comment=""/>
+                <Value Name="LevelSPL" Value="30" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="15" Comment=""/>
+                <Value Name="CU" Value="0" Comment=""/>
+                <Value Name="LevelSPL" Value="15" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="20" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="20" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="76.5592" Comment=""/>
+                <Value Name="CU" Value="40" Comment=""/>
+                <Value Name="LevelSPL" Value="76.5592" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="34.1397" Comment=""/>
+                <Value Name="CU" Value="15" Comment=""/>
+                <Value Name="LevelSPL" Value="34.1397" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="62.4194" Comment=""/>
+                <Value Name="CU" Value="35" Comment=""/>
+                <Value Name="LevelSPL" Value="62.4194" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="19.9999" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="19.9999" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="48.2796" Comment=""/>
+                <Value Name="CU" Value="15" Comment=""/>
+                <Value Name="LevelSPL" Value="48.2796" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="36.9273" Comment=""/>
+                <Value Name="CU" Value="10" Comment=""/>
+                <Value Name="LevelSPL" Value="36.9273" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="52.8588" Comment=""/>
+                <Value Name="CU" Value="25" Comment=""/>
+                <Value Name="LevelSPL" Value="52.8588" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="84.7219" Comment=""/>
+                <Value Name="CU" Value="50" Comment=""/>
+                <Value Name="LevelSPL" Value="84.7219" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="68.7904" Comment=""/>
+                <Value Name="CU" Value="40" Comment=""/>
+                <Value Name="LevelSPL" Value="68.7904" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="20.9958" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="20.9958" Comment=""/>
+              </Subheader>
+            </Subheader>
+            <Subheader Name="LevFitData" Comment="">
+              <Subheader Name="TmpData" Comment="">
+                <Value Name="PhaseIndices" Value="0 1 8 13" Comment=""/>
+                <Value Name="PhaseLevels" Value="36.9273 52.8588 84.7219 68.7904 20.9958" Comment=""/>
+                <Value Name="EstimationLevels" Value="20 95 76.5592 34.1397 62.4194 19.9999 48.2796" Comment=""/>
+                <Value Name="EstimationResponses" Value="5 50 40 15 35 5 15" Comment=""/>
+                <Value Name="EvaluatedTrials" Value="-1" Comment=""/>
+                <Value Name="AdaptiveMinLevel" Value="-73" Comment=""/>
+                <Value Name="AdaptiveMaxLevel" Value="95" Comment=""/>
+                <Value Name="PrecalculatedLevels" Value="36.9273 52.8588 84.7219 68.7904 20.9958" Comment=""/>
+                <Value Name="RunningLevelLimit" Value="84.7219" Comment=""/>
+                <Value Name="BranchIndex" Value="" Comment=""/>
+                <Subheader Name="Ascending" Comment="">
+                  <Value Name="LastLevel" Value="95" Comment=""/>
+                  <Value Name="LastResponse" Value="50" Comment=""/>
+                  <Value Name="AllResponses" Value="40 50" Comment=""/>
+                </Subheader>
+                <Subheader Name="Descending" Comment="">
+                  <Value Name="LastLevel" Value="20" Comment=""/>
+                  <Value Name="LastResponse" Value="5" Comment=""/>
+                  <Value Name="AllResponses" Value="20 15 10 0 5" Comment=""/>
+                </Subheader>
+                <Value Name="Branches" Value="" Comment=""/>
+              </Subheader>
+              <Subheader Name="LevelControl" Comment="">
+                <Value Name="Status" Value="full evaluate" Comment=""/>
+              </Subheader>
+              <Subheader Name="Fit" Comment="">
+                <Value Name="Status" Value="full postfit" Comment=""/>
+                <Value Name="SlopeL" Value="0.555306" Comment=""/>
+                <Value Name="SlopeU" Value="0.730232" Comment=""/>
+                <Value Name="Intersection" Value="58" Comment=""/>
+                <Value Name="FitParameters" Value="SlopeL SlopeU Intersection" Comment=""/>
+                <Value Name="FitFunction" Value="LinBez2x3B" Comment=""/>
+                <Subheader Name="Data" Comment="">
+                  <Value Name="" Value="12.9798 0" Comment=""/>
+                  <Value Name="" Value="39.9919 15" Comment=""/>
+                  <Value Name="" Value="41.7819 16" Comment=""/>
+                  <Value Name="" Value="43.5504 17" Comment=""/>
+                  <Value Name="" Value="45.2973 18" Comment=""/>
+                  <Value Name="" Value="47.0226 19" Comment=""/>
+                  <Value Name="" Value="48.7263 20" Comment=""/>
+                  <Value Name="" Value="50.4085 21" Comment=""/>
+                  <Value Name="" Value="52.0691 22" Comment=""/>
+                  <Value Name="" Value="53.7082 23" Comment=""/>
+                  <Value Name="" Value="55.3256 24" Comment=""/>
+                  <Value Name="" Value="56.9215 25" Comment=""/>
+                  <Value Name="" Value="58.4959 26" Comment=""/>
+                  <Value Name="" Value="60.0486 27" Comment=""/>
+                  <Value Name="" Value="61.5798 28" Comment=""/>
+                  <Value Name="" Value="63.0895 29" Comment=""/>
+                  <Value Name="" Value="64.5775 30" Comment=""/>
+                  <Value Name="" Value="66.044 31" Comment=""/>
+                  <Value Name="" Value="67.4889 32" Comment=""/>
+                  <Value Name="" Value="68.9123 33" Comment=""/>
+                  <Value Name="" Value="70.3141 34" Comment=""/>
+                  <Value Name="" Value="71.6943 35" Comment=""/>
+                  <Value Name="" Value="92.2357 50" Comment=""/>
+                </Subheader>
+              </Subheader>
+            </Subheader>
+            <Value Name="SignalDisplayName" Value="Noise English (UK) Matrix Test" Comment=""/>
+            <Value Name="Duration" Value="91548" Comment=""/>
+            <Value Name="BlockStart" Value="2024 03 2 26 16 03 54 0549" Comment=""/>
+            <Value Name="BlockEnd" Value="2024 03 2 26 16 06 31 0507" Comment=""/>
+          </Subheader>
+        </Subheader>
+        <Value Name="SignalGroupDisplayName" Value="Single signals" Comment=""/>
+        <Value Name="GroupStart" Value="2024 03 2 26 16 03 54 0549" Comment=""/>
+        <Value Name="GroupEnd" Value="2024 03 2 26 16 06 31 0507" Comment=""/>
+      </Subheader>
+      <Subheader Name="" Comment="">
+        <Value Name="GroupId" Value="{28B921DA-1A30-4F53-976B-17F00731C9A5}" Comment=""/>
+        <Value Name="SignalGroup" Value="_KLS_SIGNALS_SINGLE_" Comment=""/>
+        <Value Name="LevelUnit" Value="SPL" Comment=""/>
+        <Value Name="ChannelLevels" Value="0 0" Comment=""/>
+        <Value Name="AdaptiveMaxLevel" Value="95" Comment=""/>
+        <Subheader Name="Blocks" Comment="">
+          <Subheader Name="" Comment="">
+            <Value Name="Signal" Value="id engmatrixnoise" Comment=""/>
+            <Value Name="Enabled" Value="1" Comment=""/>
+            <Value Name="CalibrationReference" Value="engmatrixnoise" Comment=""/>
+            <Value Name="Status" Value="done" Comment=""/>
+            <Value Name="Repetitions" Value="0" Comment=""/>
+            <Value Name="SignalLength" Value="1000" Comment=""/>
+            <Value Name="RampLength" Value="50" Comment=""/>
+            <Value Name="LevelOffset" Value="0" Comment=""/>
+            <Value Name="TrialsTotal" Value="22" Comment=""/>
+            <Value Name="TrialsDone" Value="22" Comment=""/>
+            <Subheader Name="Trials" Comment="">
+              <Subheader Name="" Comment="">
+                <Value Name="Level" Value="75" Comment=""/>
+                <Value Name="CU" Value="35" Comment=""/>
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="LevelSPL" Value="75" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="85" Comment=""/>
+                <Value Name="CU" Value="45" Comment=""/>
+                <Value Name="LevelSPL" Value="85" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="60" Comment=""/>
+                <Value Name="CU" Value="15" Comment=""/>
+                <Value Name="LevelSPL" Value="60" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="95" Comment=""/>
+                <Value Name="CU" Value="50" Comment=""/>
+                <Value Name="LevelSPL" Value="95" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="45" Comment=""/>
+                <Value Name="CU" Value="15" Comment=""/>
+                <Value Name="LevelSPL" Value="45" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="30" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="30" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="15" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="15" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="0" Comment=""/>
+                <Value Name="CU" Value="0" Comment=""/>
+                <Value Name="LevelSPL" Value="0" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="5" Comment=""/>
+                <Value Name="CU" Value="0" Comment=""/>
+                <Value Name="LevelSPL" Value="5" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="10" Comment=""/>
+                <Value Name="CU" Value="0" Comment=""/>
+                <Value Name="LevelSPL" Value="10" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="15" Comment=""/>
+                <Value Name="CU" Value="0" Comment=""/>
+                <Value Name="LevelSPL" Value="15" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="20" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="20" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="19.9999" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="19.9999" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="62.4194" Comment=""/>
+                <Value Name="CU" Value="25" Comment=""/>
+                <Value Name="LevelSPL" Value="62.4194" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="48.2796" Comment=""/>
+                <Value Name="CU" Value="20" Comment=""/>
+                <Value Name="LevelSPL" Value="48.2796" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="76.5592" Comment=""/>
+                <Value Name="CU" Value="35" Comment=""/>
+                <Value Name="LevelSPL" Value="76.5592" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="34.1397" Comment=""/>
+                <Value Name="CU" Value="15" Comment=""/>
+                <Value Name="LevelSPL" Value="34.1397" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="20.4547" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="20.4547" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="91.5319" Comment=""/>
+                <Value Name="CU" Value="45" Comment=""/>
+                <Value Name="LevelSPL" Value="91.5319" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="55.9933" Comment=""/>
+                <Value Name="CU" Value="25" Comment=""/>
+                <Value Name="LevelSPL" Value="55.9933" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="73.7626" Comment=""/>
+                <Value Name="CU" Value="35" Comment=""/>
+                <Value Name="LevelSPL" Value="73.7626" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="38.224" Comment=""/>
+                <Value Name="CU" Value="25" Comment=""/>
+                <Value Name="LevelSPL" Value="38.224" Comment=""/>
+              </Subheader>
+            </Subheader>
+            <Subheader Name="LevFitData" Comment="">
+              <Subheader Name="TmpData" Comment="">
+                <Value Name="PhaseIndices" Value="0 1 12 17" Comment=""/>
+                <Value Name="PhaseLevels" Value="20.4547 91.5319 55.9933 73.7626 38.224" Comment=""/>
+                <Value Name="EstimationLevels" Value="20 95 19.9999 62.4194 48.2796 76.5592 34.1397" Comment=""/>
+                <Value Name="EstimationResponses" Value="5 50 5 25 20 35 15" Comment=""/>
+                <Value Name="EvaluatedTrials" Value="-1" Comment=""/>
+                <Value Name="AdaptiveMinLevel" Value="-73" Comment=""/>
+                <Value Name="AdaptiveMaxLevel" Value="95" Comment=""/>
+                <Value Name="PrecalculatedLevels" Value="20.4547 91.5319 55.9933 73.7626 38.224" Comment=""/>
+                <Value Name="BranchIndex" Value="" Comment=""/>
+                <Subheader Name="Ascending" Comment="">
+                  <Value Name="LastLevel" Value="95" Comment=""/>
+                  <Value Name="LastResponse" Value="50" Comment=""/>
+                  <Value Name="AllResponses" Value="45 50" Comment=""/>
+                </Subheader>
+                <Subheader Name="Descending" Comment="">
+                  <Value Name="LastLevel" Value="20" Comment=""/>
+                  <Value Name="LastResponse" Value="5" Comment=""/>
+                  <Value Name="AllResponses" Value="15 15 5 5 0 0 0 0 5" Comment=""/>
+                </Subheader>
+                <Value Name="Branches" Value="" Comment=""/>
+              </Subheader>
+              <Subheader Name="LevelControl" Comment="">
+                <Value Name="Status" Value="full evaluate" Comment=""/>
+              </Subheader>
+              <Subheader Name="Fit" Comment="">
+                <Value Name="Status" Value="full postfit" Comment=""/>
+                <Value Name="SlopeL" Value="0.445484" Comment=""/>
+                <Value Name="SlopeU" Value="0.819131" Comment=""/>
+                <Value Name="Intersection" Value="64" Comment=""/>
+                <Value Name="FitParameters" Value="SlopeL SlopeU Intersection" Comment=""/>
+                <Value Name="FitFunction" Value="LinBez2x3B" Comment=""/>
+                <Subheader Name="Data" Comment="">
+                  <Value Name="" Value="7.88126 0" Comment=""/>
+                  <Value Name="" Value="41.5525 15" Comment=""/>
+                  <Value Name="" Value="43.7717 16" Comment=""/>
+                  <Value Name="" Value="45.9396 17" Comment=""/>
+                  <Value Name="" Value="48.0564 18" Comment=""/>
+                  <Value Name="" Value="50.1219 19" Comment=""/>
+                  <Value Name="" Value="52.1363 20" Comment=""/>
+                  <Value Name="" Value="54.0995 21" Comment=""/>
+                  <Value Name="" Value="56.0114 22" Comment=""/>
+                  <Value Name="" Value="57.8722 23" Comment=""/>
+                  <Value Name="" Value="59.6818 24" Comment=""/>
+                  <Value Name="" Value="61.4401 25" Comment=""/>
+                  <Value Name="" Value="63.1473 26" Comment=""/>
+                  <Value Name="" Value="64.8033 27" Comment=""/>
+                  <Value Name="" Value="66.4081 28" Comment=""/>
+                  <Value Name="" Value="67.9617 29" Comment=""/>
+                  <Value Name="" Value="69.4641 30" Comment=""/>
+                  <Value Name="" Value="70.9153 31" Comment=""/>
+                  <Value Name="" Value="72.3153 32" Comment=""/>
+                  <Value Name="" Value="73.6641 33" Comment=""/>
+                  <Value Name="" Value="74.9617 34" Comment=""/>
+                  <Value Name="" Value="76.2081 35" Comment=""/>
+                  <Value Name="" Value="94.5201 50" Comment=""/>
+                </Subheader>
+              </Subheader>
+            </Subheader>
+            <Value Name="SignalDisplayName" Value="Noise English (UK) Matrix Test" Comment=""/>
+            <Value Name="Duration" Value="94233" Comment=""/>
+            <Value Name="BlockStart" Value="2024 03 2 26 16 06 31 0524" Comment=""/>
+            <Value Name="BlockEnd" Value="2024 03 2 26 16 08 50 0253" Comment=""/>
+          </Subheader>
+        </Subheader>
+        <Value Name="SignalGroupDisplayName" Value="Single signals" Comment=""/>
+        <Value Name="GroupStart" Value="2024 03 2 26 16 07 15 0751" Comment=""/>
+        <Value Name="GroupEnd" Value="2024 03 2 26 16 08 50 0253" Comment=""/>
+      </Subheader>
+      <Subheader Name="" Comment="">
+        <Value Name="GroupId" Value="{F07BE19C-FDE5-4889-AC0C-C63ADCB82531}" Comment=""/>
+        <Value Name="SignalGroup" Value="_KLS_SIGNALS_SINGLE_" Comment=""/>
+        <Value Name="LevelUnit" Value="SPL" Comment=""/>
+        <Value Name="ChannelLevels" Value="0 0" Comment=""/>
+        <Subheader Name="Blocks" Comment="">
+          <Subheader Name="" Comment="">
+            <Value Name="Signal" Value="id engmatrixnoise" Comment=""/>
+            <Value Name="Enabled" Value="1" Comment=""/>
+            <Value Name="AdaptiveMaxLevel" Value="95" Comment=""/>
+            <Value Name="CalibrationReference" Value="engmatrixnoise" Comment=""/>
+            <Value Name="Status" Value="done" Comment=""/>
+            <Value Name="Repetitions" Value="0" Comment=""/>
+            <Value Name="SignalLength" Value="1000" Comment=""/>
+            <Value Name="RampLength" Value="50" Comment=""/>
+            <Value Name="LevelOffset" Value="0" Comment=""/>
+            <Value Name="TrialsTotal" Value="21" Comment=""/>
+            <Value Name="TrialsDone" Value="21" Comment=""/>
+            <Subheader Name="Trials" Comment="">
+              <Subheader Name="" Comment="">
+                <Value Name="Level" Value="75" Comment=""/>
+                <Value Name="CU" Value="35" Comment=""/>
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="LevelSPL" Value="75" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="85" Comment=""/>
+                <Value Name="CU" Value="50" Comment=""/>
+                <Value Name="LevelSPL" Value="85" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="60" Comment=""/>
+                <Value Name="CU" Value="25" Comment=""/>
+                <Value Name="LevelSPL" Value="60" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="45" Comment=""/>
+                <Value Name="CU" Value="15" Comment=""/>
+                <Value Name="LevelSPL" Value="45" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="30" Comment=""/>
+                <Value Name="CU" Value="10" Comment=""/>
+                <Value Name="LevelSPL" Value="30" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="15" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="15" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="0" Comment=""/>
+                <Value Name="CU" Value="0" Comment=""/>
+                <Value Name="LevelSPL" Value="0" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="5" Comment=""/>
+                <Value Name="CU" Value="0" Comment=""/>
+                <Value Name="LevelSPL" Value="5" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="10" Comment=""/>
+                <Value Name="CU" Value="0" Comment=""/>
+                <Value Name="LevelSPL" Value="10" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="15" Comment=""/>
+                <Value Name="CU" Value="0" Comment=""/>
+                <Value Name="LevelSPL" Value="15" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="20" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="20" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="62.4194" Comment=""/>
+                <Value Name="CU" Value="25" Comment=""/>
+                <Value Name="LevelSPL" Value="62.4194" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="34.1397" Comment=""/>
+                <Value Name="CU" Value="15" Comment=""/>
+                <Value Name="LevelSPL" Value="34.1397" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="19.9999" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="19.9999" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="76.5592" Comment=""/>
+                <Value Name="CU" Value="35" Comment=""/>
+                <Value Name="LevelSPL" Value="76.5592" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="48.2796" Comment=""/>
+                <Value Name="CU" Value="25" Comment=""/>
+                <Value Name="LevelSPL" Value="48.2796" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="86.2494" Comment=""/>
+                <Value Name="CU" Value="50" Comment=""/>
+                <Value Name="LevelSPL" Value="86.2494" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="19.8322" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="19.8322" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="69.6451" Comment=""/>
+                <Value Name="CU" Value="35" Comment=""/>
+                <Value Name="LevelSPL" Value="69.6451" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="36.4365" Comment=""/>
+                <Value Name="CU" Value="15" Comment=""/>
+                <Value Name="LevelSPL" Value="36.4365" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="53.0408" Comment=""/>
+                <Value Name="CU" Value="25" Comment=""/>
+                <Value Name="LevelSPL" Value="53.0408" Comment=""/>
+              </Subheader>
+            </Subheader>
+            <Subheader Name="LevFitData" Comment="">
+              <Subheader Name="TmpData" Comment="">
+                <Value Name="PhaseIndices" Value="0 1 11 16" Comment=""/>
+                <Value Name="PhaseLevels" Value="86.2494 19.8322 69.6451 36.4365 53.0408" Comment=""/>
+                <Value Name="EstimationLevels" Value="20 85 62.4194 34.1397 19.9999 76.5592 48.2796" Comment=""/>
+                <Value Name="EstimationResponses" Value="5 50 25 15 5 35 25" Comment=""/>
+                <Value Name="EvaluatedTrials" Value="-1" Comment=""/>
+                <Value Name="AdaptiveMinLevel" Value="-73" Comment=""/>
+                <Value Name="AdaptiveMaxLevel" Value="95" Comment=""/>
+                <Value Name="PrecalculatedLevels" Value="86.2494 19.8322 69.6451 36.4365 53.0408" Comment=""/>
+                <Value Name="RunningLevelLimit" Value="86.2494" Comment=""/>
+                <Value Name="BranchIndex" Value="" Comment=""/>
+                <Subheader Name="Ascending" Comment="">
+                  <Value Name="LastLevel" Value="85" Comment=""/>
+                  <Value Name="LastResponse" Value="50" Comment=""/>
+                  <Value Name="AllResponses" Value="50" Comment=""/>
+                </Subheader>
+                <Subheader Name="Descending" Comment="">
+                  <Value Name="LastLevel" Value="20" Comment=""/>
+                  <Value Name="LastResponse" Value="5" Comment=""/>
+                  <Value Name="AllResponses" Value="25 15 10 5 0 0 0 0 5" Comment=""/>
+                </Subheader>
+                <Value Name="Branches" Value="" Comment=""/>
+              </Subheader>
+              <Subheader Name="LevelControl" Comment="">
+                <Value Name="Status" Value="full evaluate" Comment=""/>
+              </Subheader>
+              <Subheader Name="Fit" Comment="">
+                <Value Name="Status" Value="full postfit" Comment=""/>
+                <Value Name="SlopeL" Value="0.474482" Comment=""/>
+                <Value Name="SlopeU" Value="0.928601" Comment=""/>
+                <Value Name="Intersection" Value="61" Comment=""/>
+                <Value Name="FitParameters" Value="SlopeL SlopeU Intersection" Comment=""/>
+                <Value Name="FitFunction" Value="LinBez2x3B" Comment=""/>
+                <Subheader Name="Data" Comment="">
+                  <Value Name="" Value="8.31096 0" Comment=""/>
+                  <Value Name="" Value="39.9244 15" Comment=""/>
+                  <Value Name="" Value="42.0062 16" Comment=""/>
+                  <Value Name="" Value="44.0364 17" Comment=""/>
+                  <Value Name="" Value="46.0152 18" Comment=""/>
+                  <Value Name="" Value="47.9424 19" Comment=""/>
+                  <Value Name="" Value="49.818 20" Comment=""/>
+                  <Value Name="" Value="51.6421 21" Comment=""/>
+                  <Value Name="" Value="53.4147 22" Comment=""/>
+                  <Value Name="" Value="55.1358 23" Comment=""/>
+                  <Value Name="" Value="56.8053 24" Comment=""/>
+                  <Value Name="" Value="58.4233 25" Comment=""/>
+                  <Value Name="" Value="59.9898 26" Comment=""/>
+                  <Value Name="" Value="61.5047 27" Comment=""/>
+                  <Value Name="" Value="62.9681 28" Comment=""/>
+                  <Value Name="" Value="64.3799 29" Comment=""/>
+                  <Value Name="" Value="65.7403 30" Comment=""/>
+                  <Value Name="" Value="67.0491 31" Comment=""/>
+                  <Value Name="" Value="68.3063 32" Comment=""/>
+                  <Value Name="" Value="69.512 33" Comment=""/>
+                  <Value Name="" Value="70.6662 34" Comment=""/>
+                  <Value Name="" Value="71.7689 35" Comment=""/>
+                  <Value Name="" Value="87.9222 50" Comment=""/>
+                </Subheader>
+              </Subheader>
+            </Subheader>
+            <Value Name="SignalDisplayName" Value="Noise English (UK) Matrix Test" Comment=""/>
+            <Value Name="Duration" Value="81673" Comment=""/>
+            <Value Name="BlockStart" Value="2024 03 2 26 16 08 50 0274" Comment=""/>
+            <Value Name="BlockEnd" Value="2024 03 2 26 16 10 12 0310" Comment=""/>
+          </Subheader>
+        </Subheader>
+        <Value Name="SignalGroupDisplayName" Value="Single signals" Comment=""/>
+        <Value Name="GroupStart" Value="2024 03 2 26 16 08 50 0274" Comment=""/>
+        <Value Name="GroupEnd" Value="2024 03 2 26 16 10 12 0310" Comment=""/>
+      </Subheader>
+      <Subheader Name="" Comment="">
+        <Value Name="GroupId" Value="{58827DF9-238C-476E-81BB-530A2D101070}" Comment=""/>
+        <Value Name="SignalGroup" Value="_KLS_SIGNALS_SINGLE_" Comment=""/>
+        <Value Name="LevelUnit" Value="SPL" Comment=""/>
+        <Value Name="ChannelLevels" Value="0 0" Comment=""/>
+        <Subheader Name="Blocks" Comment="">
+          <Subheader Name="" Comment="">
+            <Value Name="Signal" Value="id engmatrixnoise" Comment=""/>
+            <Value Name="Enabled" Value="1" Comment=""/>
+            <Value Name="AdaptiveMaxLevel" Value="95" Comment=""/>
+            <Value Name="CalibrationReference" Value="engmatrixnoise" Comment=""/>
+            <Value Name="Status" Value="done" Comment=""/>
+            <Value Name="Repetitions" Value="0" Comment=""/>
+            <Value Name="SignalLength" Value="1000" Comment=""/>
+            <Value Name="RampLength" Value="50" Comment=""/>
+            <Value Name="LevelOffset" Value="0" Comment=""/>
+            <Value Name="TrialsTotal" Value="19" Comment=""/>
+            <Value Name="TrialsDone" Value="19" Comment=""/>
+            <Subheader Name="Trials" Comment="">
+              <Subheader Name="" Comment="">
+                <Value Name="Level" Value="75" Comment=""/>
+                <Value Name="CU" Value="45" Comment=""/>
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="LevelSPL" Value="75" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="85" Comment=""/>
+                <Value Name="CU" Value="50" Comment=""/>
+                <Value Name="LevelSPL" Value="85" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="60" Comment=""/>
+                <Value Name="CU" Value="25" Comment=""/>
+                <Value Name="LevelSPL" Value="60" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="45" Comment=""/>
+                <Value Name="CU" Value="15" Comment=""/>
+                <Value Name="LevelSPL" Value="45" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="30" Comment=""/>
+                <Value Name="CU" Value="10" Comment=""/>
+                <Value Name="LevelSPL" Value="30" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="15" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="15" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="0" Comment=""/>
+                <Value Name="CU" Value="0" Comment=""/>
+                <Value Name="LevelSPL" Value="0" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="5" Comment=""/>
+                <Value Name="CU" Value="0" Comment=""/>
+                <Value Name="LevelSPL" Value="5" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="10" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="10" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="38.2796" Comment=""/>
+                <Value Name="CU" Value="10" Comment=""/>
+                <Value Name="LevelSPL" Value="38.2796" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="66.5592" Comment=""/>
+                <Value Name="CU" Value="30" Comment=""/>
+                <Value Name="LevelSPL" Value="66.5592" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="52.4194" Comment=""/>
+                <Value Name="CU" Value="25" Comment=""/>
+                <Value Name="LevelSPL" Value="52.4194" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="9.99992" Comment=""/>
+                <Value Name="CU" Value="5" Comment=""/>
+                <Value Name="LevelSPL" Value="9.99992" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="24.1397" Comment=""/>
+                <Value Name="CU" Value="10" Comment=""/>
+                <Value Name="LevelSPL" Value="24.1397" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="69.0292" Comment=""/>
+                <Value Name="CU" Value="35" Comment=""/>
+                <Value Name="LevelSPL" Value="69.0292" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="86.9176" Comment=""/>
+                <Value Name="CU" Value="50" Comment=""/>
+                <Value Name="LevelSPL" Value="86.9176" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="51.1409" Comment=""/>
+                <Value Name="CU" Value="25" Comment=""/>
+                <Value Name="LevelSPL" Value="51.1409" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="15.3642" Comment=""/>
+                <Value Name="CU" Value="0" Comment=""/>
+                <Value Name="LevelSPL" Value="15.3642" Comment=""/>
+              </Subheader>
+              <Subheader Name="" Comment="">
+                <Value Name="Status" Value="done" Comment=""/>
+                <Value Name="LevFitDone" Value="1" Comment=""/>
+                <Value Name="Level" Value="33.2525" Comment=""/>
+                <Value Name="CU" Value="10" Comment=""/>
+                <Value Name="LevelSPL" Value="33.2525" Comment=""/>
+              </Subheader>
+            </Subheader>
+            <Subheader Name="LevFitData" Comment="">
+              <Subheader Name="TmpData" Comment="">
+                <Value Name="PhaseIndices" Value="0 1 9 14" Comment=""/>
+                <Value Name="PhaseLevels" Value="69.0292 86.9176 51.1409 15.3642 33.2525" Comment=""/>
+                <Value Name="EstimationLevels" Value="10 85 38.2796 66.5592 52.4194 9.99992 24.1397" Comment=""/>
+                <Value Name="EstimationResponses" Value="5 50 10 30 25 5 10" Comment=""/>
+                <Value Name="EvaluatedTrials" Value="-1" Comment=""/>
+                <Value Name="AdaptiveMinLevel" Value="-73" Comment=""/>
+                <Value Name="AdaptiveMaxLevel" Value="95" Comment=""/>
+                <Value Name="PrecalculatedLevels" Value="69.0292 86.9176 51.1409 15.3642 33.2525" Comment=""/>
+                <Value Name="RunningLevelLimit" Value="86.9176" Comment=""/>
+                <Value Name="BranchIndex" Value="" Comment=""/>
+                <Subheader Name="Ascending" Comment="">
+                  <Value Name="LastLevel" Value="85" Comment=""/>
+                  <Value Name="LastResponse" Value="50" Comment=""/>
+                  <Value Name="AllResponses" Value="50" Comment=""/>
+                </Subheader>
+                <Subheader Name="Descending" Comment="">
+                  <Value Name="LastLevel" Value="10" Comment=""/>
+                  <Value Name="LastResponse" Value="5" Comment=""/>
+                  <Value Name="AllResponses" Value="25 15 10 5 0 0 5" Comment=""/>
+                </Subheader>
+                <Value Name="Branches" Value="" Comment=""/>
+              </Subheader>
+              <Subheader Name="LevelControl" Comment="">
+                <Value Name="Status" Value="full evaluate" Comment=""/>
+              </Subheader>
+              <Subheader Name="Fit" Comment="">
+                <Value Name="Status" Value="full postfit" Comment=""/>
+                <Value Name="SlopeL" Value="0.424031" Comment=""/>
+                <Value Name="SlopeU" Value="1.69885" Comment=""/>
+                <Value Name="Intersection" Value="63.3" Comment=""/>
+                <Value Name="FitParameters" Value="SlopeL SlopeU Intersection" Comment=""/>
+                <Value Name="FitFunction" Value="LinBez2x3B" Comment=""/>
+                <Subheader Name="Data" Comment="">
+                  <Value Name="" Value="4.34205 0" Comment=""/>
+                  <Value Name="" Value="39.7168 15" Comment=""/>
+                  <Value Name="" Value="42.0309 16" Comment=""/>
+                  <Value Name="" Value="44.2565 17" Comment=""/>
+                  <Value Name="" Value="46.3936 18" Comment=""/>
+                  <Value Name="" Value="48.4422 19" Comment=""/>
+                  <Value Name="" Value="50.4024 20" Comment=""/>
+                  <Value Name="" Value="52.274 21" Comment=""/>
+                  <Value Name="" Value="54.0572 22" Comment=""/>
+                  <Value Name="" Value="55.7519 23" Comment=""/>
+                  <Value Name="" Value="57.3581 24" Comment=""/>
+                  <Value Name="" Value="58.8758 25" Comment=""/>
+                  <Value Name="" Value="60.305 26" Comment=""/>
+                  <Value Name="" Value="61.6458 27" Comment=""/>
+                  <Value Name="" Value="62.898 28" Comment=""/>
+                  <Value Name="" Value="64.0618 29" Comment=""/>
+                  <Value Name="" Value="65.1371 30" Comment=""/>
+                  <Value Name="" Value="66.1239 31" Comment=""/>
+                  <Value Name="" Value="67.0223 32" Comment=""/>
+                  <Value Name="" Value="67.8321 33" Comment=""/>
+                  <Value Name="" Value="68.5535 34" Comment=""/>
+                  <Value Name="" Value="69.1863 35" Comment=""/>
+                  <Value Name="" Value="78.0158 50" Comment=""/>
+                </Subheader>
+              </Subheader>
+            </Subheader>
+            <Value Name="SignalDisplayName" Value="Noise English (UK) Matrix Test" Comment=""/>
+            <Value Name="Duration" Value="79658" Comment=""/>
+            <Value Name="BlockStart" Value="2024 03 2 26 16 10 12 0327" Comment=""/>
+            <Value Name="BlockEnd" Value="2024 03 2 26 16 11 32 0274" Comment=""/>
+          </Subheader>
+        </Subheader>
+        <Value Name="SignalGroupDisplayName" Value="Single signals" Comment=""/>
+        <Value Name="GroupStart" Value="2024 03 2 26 16 10 12 0327" Comment=""/>
+        <Value Name="GroupEnd" Value="2024 03 2 26 16 11 32 0274" Comment=""/>
+      </Subheader>
+    </Subheader>
+    <Value Name="ClientLanguage" Value="eng" Comment=""/>
+    <Value Name="MeasurementProfileId" Value="{826E1217-9844-4F52-B374-5D329566B4A6}" Comment=""/>
+    <Value Name="UserId" Value="Auritec" Comment=""/>
+    <Value Name="ClientId" Value="000dd2fe-1792-4a8b-921d-9883362d6d80" Comment=""/>
+    <Value Name="ConfigFile" Value="${~kls}/etc/kls.cfg" Comment=""/>
+    <Value Name="MeasurementProfileName" Value="Headphones, broadband, binaural (26/03) 4 blocks" Comment=""/>
+    <Value Name="editable" Value="1" Comment=""/>
+    <Value Name="MeasurementResultId" Value="{6544F9C9-9C6F-4717-861E-2922DA81077B}" Comment=""/>
+    <Value Name="MeasurementStatus" Value="COMPLETE" Comment=""/>
+    <Subheader Name="Settings" Comment="">
+      <Value Name="Audiometer" Value="softwareaudiometer" Comment=""/>
+    </Subheader>
+    <Value Name="Equalisation" Value="any" Comment=""/>
+    <Subheader Name="AudiometerPresets" Comment="">
+      <Value Name="" Value="softwareaudiometer: preset -r '/Output/&quot;1&quot;/headphone' /PORT&lt;1&gt;SpeakerAuritecEar30Audio_0_0/HDA300/-" Comment=""/>
+      <Value Name="" Value="softwareaudiometer: preset -r '/Output/&quot;1&quot;/freefield' /PORT&lt;1&gt;SpeakerAuritecEar30Audio_0_0/-/-" Comment=""/>
+      <Value Name="" Value="softwareaudiometer: preset -r '/Output/&quot;2&quot;/headphone' /PORT&lt;2&gt;SpeakerAuritecEar30Audio_1_0/HDA300/-" Comment=""/>
+      <Value Name="" Value="softwareaudiometer: preset -r '/Output/&quot;2&quot;/freefield' /PORT&lt;2&gt;SpeakerAuritecEar30Audio_1_0/-/-" Comment=""/>
+    </Subheader>
+    <Subheader Name="LevelOffset" Comment="">
+      <Subheader Name="HDA300" Comment="">
+        <Subheader Name="HL" Comment="">
+          <Value Name="engmatrixnoise" Value="6" Comment=""/>
+          <Value Name="icra1" Value="6" Comment=""/>
+          <Value Name="icra4-250" Value="6" Comment=""/>
+          <Value Name="icra5-250" Value="6" Comment=""/>
+          <Value Name="IFFM" Value="6" Comment=""/>
+          <Value Name="IFNoise" Value="6" Comment=""/>
+          <Value Name="ISTS" Value="6" Comment=""/>
+          <Value Name="lnn10000_1" Value="18" Comment=""/>
+          <Value Name="lnn1000_1" Value="2" Comment=""/>
+          <Value Name="lnn125_1" Value="27" Comment=""/>
+          <Value Name="lnn1500_1" Value="3" Comment=""/>
+          <Value Name="lnn2000_1" Value="0" Comment=""/>
+          <Value Name="lnn250_1" Value="20" Comment=""/>
+          <Value Name="lnn3000_1" Value="-3" Comment=""/>
+          <Value Name="lnn4000_1" Value="-0.5" Comment=""/>
+          <Value Name="lnn500_1" Value="8" Comment=""/>
+          <Value Name="lnn6000_1" Value="21" Comment=""/>
+          <Value Name="lnn8000_1" Value="23" Comment=""/>
+        </Subheader>
+      </Subheader>
+    </Subheader>
+    <Subheader Name="Scale" Comment="">
+      <Value Name="50" Value="extremely loud" Comment=""/>
+      <Value Name="45" Value="very loud" Comment=""/>
+      <Value Name="40" Value="$WEDGE 0.8 0.7" Comment=""/>
+      <Value Name="35" Value="loud" Comment=""/>
+      <Value Name="30" Value="$WEDGE 0.6 0.5" Comment=""/>
+      <Value Name="25" Value="medium" Comment=""/>
+      <Value Name="20" Value="$WEDGE 0.4 0.3" Comment=""/>
+      <Value Name="15" Value="soft" Comment=""/>
+      <Value Name="10" Value="$WEDGE 0.2 0.1" Comment=""/>
+      <Value Name="5" Value="very soft" Comment=""/>
+      <Value Name="0" Value="not heard" Comment=""/>
+    </Subheader>
+    <Value Name="ScaleString" Value="&quot;extremely loud test&quot; &quot;very loud&quot; &quot;$WEDGE 0.8 0.7&quot; loud &quot;$WEDGE 0.6 0.5&quot; medium &quot;$WEDGE 0.4 0.3&quot; soft &quot;$WEDGE 0.2 0.1&quot; &quot;very soft&quot; &quot;not heard&quot;" Comment=""/>
+    <Value Name="FitControl" Value="LinBez2x3C" Comment=""/>
+    <Value Name="TransducerName" Value="HDA300 HDA300" Comment=""/>
+    <Value Name="TransducerId" Value="- -" Comment=""/>
+    <Value Name="TransducerPort" Value="PORT&lt;1&gt;SpeakerAuritecEar30Audio_0_0 PORT&lt;2&gt;SpeakerAuritecEar30Audio_1_0" Comment=""/>
+    <Value Name="TransducerDescription" Value="&quot;&quot; &quot;&quot;" Comment=""/>
+    <Value Name="TransducerDisplayName" Value="&quot;left: HDA300&quot; &quot;right: HDA300&quot;" Comment=""/>
+    <Value Name="TransducerDisplayNameShort" Value="&quot;left: HDA300&quot; &quot;right: HDA300&quot;" Comment=""/>
+    <Value Name="MeasurementCreation" Value="2024 03 2 26 16 03 41 0304" Comment=""/>
+    <Value Name="MeasurementStart" Value="2024 03 2 26 16 03 54 0532" Comment=""/>
+    <Value Name="MeasurementEnd" Value="2024 03 2 26 16 11 32 0289" Comment=""/>
+    <Value Name="MeasurementDuration" Value="347112" Comment=""/>
+    <Value Name="ReadableResult" Value="'Headphones; Channels: Binaural; Signal group: Single signals; Signals: &quot;Noise English (UK) Matrix Test&quot;'|'Headphones; Channels: Binaural; Signal group: Single signals; Signals: &quot;Noise English (UK) Matrix Test&quot;'|'Headphones; Channels: Binaural; Signal group: Single signals; Signals: &quot;Noise English (UK) Matrix Test&quot;'|'Headphones; Channels: Binaural; Signal group: Single signals; Signals: &quot;Noise English (UK) Matrix Test&quot;'" Comment=""/>
+    <Value Name="BrowseableResult" Value="'TransducerType: headphone; Channels: Binaural; SignalGroup: _KLS_SIGNALS_SINGLE_; Signals: &quot;id engmatrixnoise&quot;'|'TransducerType: headphone; Channels: Binaural; SignalGroup: _KLS_SIGNALS_SINGLE_; Signals: &quot;id engmatrixnoise&quot;'|'TransducerType: headphone; Channels: Binaural; SignalGroup: _KLS_SIGNALS_SINGLE_; Signals: &quot;id engmatrixnoise&quot;'|'TransducerType: headphone; Channels: Binaural; SignalGroup: _KLS_SIGNALS_SINGLE_; Signals: &quot;id engmatrixnoise&quot;'" Comment=""/>
+    <Value Name="ModuleFileVersion" Value="2.3.1.202" Comment=""/>
+    <Value Name="MeasurementLastChange" Value="2024 03 2 26 16 14 51 0458" Comment=""/>
+    <Value Name="UserIdLastChange" Value="Auritec" Comment=""/>
+  </Subheader>
+  <Value Name="DBCLASTCHANGE" Value="2024 03 2 26 16 14 51 0000" Comment=""/>
+</XML>

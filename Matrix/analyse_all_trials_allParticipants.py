@@ -11,7 +11,19 @@ import pwlf_bez_collection
 import matplotlib.pyplot as plt
 import pandas as pd
 from IPython.display import display
-import re
+
+work_path=os.getcwd()
+xml_path=work_path+"\\xml_data" 
+participantIDs=['6915','3634']
+tests=['CLS']
+# xmlfile_names=["CLS_3634.xml"]
+# xmlfile_names=["CLS_6915.xml"]
+save_path=work_path+"\\save_matfiles" 
+xmlfile_names=[]
+
+for ID in participantIDs:
+    for test in tests:
+        xmlfile_names.append(test+'_'+ID+'.xml')
 
 def x2y_lin(x, x0, y0, m):
     return y0 + m*(x-x0)
@@ -66,54 +78,21 @@ def nrmse(predictions, targets):
     return np.sqrt(((predictions - targets) ** 2).mean())/len(targets)
 
 
-#%%
-# Find all OAE files ---------------------------------------------
-# directory_path = os.getcwd()+'\\'
-directory_path = 'c:\\Users\\lenyv\\OneDrive - University College London\\UCL\\Hyperacusis-project\\Python\\Loudness Analysis Scripts\\Participants\\'
-extension = ".xml"
-name_pattern =r'(CLS)_(\d{4})\.xml$'  
-matched_files = []
-IDs=[]
-
-for root, _, files in os.walk(directory_path):
-    
-    for file in files:
-        if file.endswith(extension) and re.match(name_pattern, file):
-            matched_files.append(os.path.join(root, file))
-
-ID_pattern = r'\\\w{3}_(\d{4})\.xml$'
-
-# List to store extracted IDs
-
-# Iterate over file paths
-for matched_file in matched_files:
-    # Search for pattern in each file path
-    match = re.search(ID_pattern, matched_file)
-    if match:
-        ID = match.group(1)
-        if ID not in IDs:
-            IDs.append(ID)
-
-participantIDs=IDs
-# Print the extracted IDs
-print("IDs in the list:")
-print(IDs)
 #%% 
-# Parse XML and import blocks obj-------------
+# Class to parse XML and import blocks obj-------------
 blockFromCls = parseXML.Cls2dic()
-CLSs=[]
+CLSs=[] 
 
 for ID in participantIDs:
 
+    file_name=(test+'_'+ID+'.xml')
     blocks=[]
     CLSs.append({})
     CLSs[-1]['ID']=ID
 
-    for file in matched_files:
-        if re.search(rf'\w+_{ID}\.xml$' , os.path.basename(file)):
-            blocks=blockFromCls.parse(file)
-            CLSs[-1]['Blocks']=blocks  
-            print("-----> xml data parsed:", str(file))
+    blocks=blockFromCls.parse(path = xml_path + '\\' + file_name)
+    CLSs[-1]['Blocks']=blocks  
+    print("-----> xml data parsed:", str(file_name))
 
 # %% 
 # Perform all the fit----------------------------------
