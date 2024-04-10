@@ -48,7 +48,7 @@ print("IDs in the list:")
 print(IDs)
 #%% 
 # Parse XML and import blocks obj-------------
-reload(parseXML)
+# reload(parseXML)
 blockFromCls = parseXML.Matrix2dic()
 CLSs=[]
 

@@ -22,23 +22,23 @@ class Matrix2dic:
         root = tree.getroot()
 
         for elem in root :
-            print(elem.tag, elem.attrib)
+            # print(elem.tag, elem.attrib)
             if elem.tag == 'Value': self.matrix[elem.attrib['Name']]=elem.attrib['Value']
             for child1 in elem:
-                print('-->', child1.tag, child1.attrib)
+                # print('-->', child1.tag, child1.attrib)
                 if child1.tag == 'Value': self.matrix[child1.attrib['Name']]=child1.attrib['Value']
                 for child12 in child1:
                     for child2 in islice(child12.iter(), 1, None):
-                        print('---->', child2.tag, child2.attrib)   
+                        # print('---->', child2.tag, child2.attrib)   
                         if child2.tag == 'Subheader' and child2.attrib['Name']== "Blocks" and child2.attrib['Comment']== "" :
-                            print('------ enter data -------------->')
+                            # print('------ enter data -------------->')
                             for child3 in child2:
                                    if child3.tag == 'Subheader' and child3.attrib['Name']== "" and child3.attrib['Comment']== "" :
                                     for child4 in child3:
-                                        print('1------->', child4.tag, child4.attrib)
+                                        # print('1------->', child4.tag, child4.attrib)
                                         if child4.tag == 'Value': self.matrix[child4.attrib['Name']]=child4.attrib['Value']
                                         if child4.tag == 'Subheader' and child4.attrib['Name']== "Trials" and child4.attrib['Comment']== "" :                             
-                                            print('----- New block -------------->')
+                                            # print('----- New block -------------->')
                                             self.blocks.append({}) 
                                             block=[]
                                             data_sentances=[]
