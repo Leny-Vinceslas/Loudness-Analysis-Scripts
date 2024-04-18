@@ -34,27 +34,33 @@ class Matrix2dic:
                             # print('------ enter data -------------->')
                             for child3 in child2:
                                    if child3.tag == 'Subheader' and child3.attrib['Name']== "" and child3.attrib['Comment']== "" :
+                                    # print('----- New block -------------->')
+                                    self.blocks.append({}) 
+
+                                    
                                     for child4 in child3:
                                         # print('1------->', child4.tag, child4.attrib)
-                                        if child4.tag == 'Value': self.matrix[child4.attrib['Name']]=child4.attrib['Value']
+                                        # if child4.tag == 'Value': self.matrix[child4.attrib['Name']]=child4.attrib['Value']
+                                        if child4.tag == 'Value': self.blocks[-1][child4.attrib['Name']]=child4.attrib['Value']
+                                        if child4.tag == 'Value' and child4.attrib['Name']== "Status" and child4.attrib['Value']== "initialised" :
+                                            del self.blocks[-1]
+                                            break
                                         if child4.tag == 'Subheader' and child4.attrib['Name']== "Trials" and child4.attrib['Comment']== "" :                             
-                                            # print('----- New block -------------->')
-                                            self.blocks.append({}) 
-                                            block=[]
+                                            
+                                            
                                             data_sentances=[]
                                             for child5 in child4:
                                                 # print('2-------->', child5.tag, child5.attrib)
-                                                block.append({}) 
                                                 if child5.tag == 'Subheader' and child5.attrib['Name']== "" and child5.attrib['Comment']== "" :
                                                     # print('----- New sentense-------------->')
                                                     data_sentances.append({})
                                                     for child6 in child5:
                                                         # print('4--------->', child6.tag, child6.attrib)
                                                         data_sentances[-1][child6.attrib['Name']]=child6.attrib['Value']
-                                            self.blocks[-1]=data_sentances
+                                            self.blocks[-1]['Sentences']=data_sentances
                     self.matrix['Blocks']=self.blocks                   
 
-        return self.matrix, self.blocks
+        return self.matrix
                         
  
  

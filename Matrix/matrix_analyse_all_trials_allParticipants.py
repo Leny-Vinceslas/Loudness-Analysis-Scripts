@@ -40,27 +40,62 @@ for matched_file in matched_files:
     if match:
         ID = match.group(1)
         if ID not in IDs:
-            IDs.append(ID)
+            # IDs.append(ID)
+            IDs.append({})
+            IDs[-1]['ID']=ID
 
-participantIDs=IDs
+# participantIDs=IDs
 # Print the extracted IDs
 print("IDs in the list:")
 print(IDs)
 #%% 
 # Parse XML and import blocks obj-------------
-# reload(parseXML)
+reload(parseXML)
 blockFromCls = parseXML.Matrix2dic()
-CLSs=[]
 
-for ID in participantIDs:
-
+for ID in IDs:
     blocks=[]
-    CLSs.append({})
-    CLSs[-1]['ID']=ID
-
     for file in matched_files:
-        if re.search(rf'\w+_{ID}\.xml$' , os.path.basename(file)):
-            matrix, blocks=blockFromCls.parse(file)
-            CLSs[-1]=matrix  
+        IDnum=ID['ID']
+        if re.search(rf'\w+_{IDnum}\.xml$' , os.path.basename(file)):
+            Matrix=blockFromCls.parse(file)
+            # IDs[-1]['Matrix']=Matrix  
+            ID['Matrix']=Matrix  
             print("-----> xml data parsed:", str(file))
 
+# %%
+# retrive sentences SNR and plot
+
+
+for ID in IDs:
+    for block in ID['Matrix']['Blocks']:
+        # for block in blocks:
+            SNRs=[]
+            trialIntel=[]
+            for sentence in block['Sentences']:
+                # for sentence in sentences:
+                    SNRs.append(float(sentence['SNR']))
+                    trialIntel.append(float(sentence['TrialIntelligibility']))
+            print("SNR:", str(SNRs))
+            print("ITL:", str(trialIntel))
+            block['SNRs']=SNRs
+            block['TrialIntel']=trialIntel
+            if "L50" in block:
+                print("L50:")
+                if any(chr.isdigit() for chr in block['L50']):
+                    L50=float(block['L50'])
+                    slope=float(block['Slope'])
+                else:L50=0
+                
+            if "SRT 0.5" in block:
+                print("SRT:")
+                L50=float(block['SRT 0.5'])
+                slope=[]
+            plt.figure()
+            plt.plot(SNRs,trialIntel,'o')
+            plt.plot(L50,0.5,'+')
+            if slope:
+                slopeY=np.array([0.4,0.5,0.6])
+                slopeX=(slope*slopeY) +L50   #problem here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                plt.plot(slopeX,slopeY,'r')
+            plt.grid()
