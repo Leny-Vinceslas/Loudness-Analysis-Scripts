@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import re
 from importlib import reload 
+from fit_psyche.psychometric_curve import PsychometricCurve
+from scipy.optimize import curve_fit
 
 
 
@@ -66,18 +68,28 @@ for ID in IDs:
 # %%
 # retrive sentences SNR and plot
 
+# psychometric function
+def func(x, alpha, beta):
+    return 1. / (1 + np.exp( -(x-alpha)/beta ))
 
 for ID in IDs:
     for block in ID['Matrix']['Blocks']:
         # for block in blocks:
-            SNRs=[]
-            trialIntel=[]
+            SNRs=np.array([])
+            trialIntel=np.array([])
             for sentence in block['Sentences']:
                 # for sentence in sentences:
-                    SNRs.append(float(sentence['SNR']))
-                    trialIntel.append(float(sentence['TrialIntelligibility']))
+                SNRs=np.append(SNRs,float(sentence['SNR']))
+                trialIntel=np.append(trialIntel,float(sentence['TrialIntelligibility']))
+                    # SNRs.append(float(sentence['SNR']))
+                    # trialIntel.append(float(sentence['TrialIntelligibility']))
             print("SNR:", str(SNRs))
             print("ITL:", str(trialIntel))
+
+            trialIntel=trialIntel[np.argsort(SNRs)]
+            SNRs=np.sort(SNRs)
+            
+            # trialIntel=trialIntel()
             block['SNRs']=SNRs
             block['TrialIntel']=trialIntel
             if "L50" in block:
@@ -91,11 +103,32 @@ for ID in IDs:
                 print("SRT:")
                 L50=float(block['SRT 0.5'])
                 slope=[]
+            
             plt.figure()
             plt.plot(SNRs,trialIntel,'o')
             plt.plot(L50,0.5,'+')
             if slope:
                 slopeY=np.array([0.4,0.5,0.6])
-                slopeX=(slope*slopeY) +L50   #problem here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                b=0.5-slope*L50
+                slopeX=(slopeY-b)/slope    #problem here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 plt.plot(slopeX,slopeY,'r')
             plt.grid()
+
+            # fitting
+
+            # pc = PsychometricCurve(model='wh').fit(SNRs, trialIntel)
+            # pc.plot(SNRs, trialIntel)
+
+            
+            xdata=SNRs
+            ydata=trialIntel
+            # xdata=[0,1,2,3,4,5]
+
+            # ydata=[0,1,2,3,4,5]
+            popt, pcov = curve_fit(func, xdata, ydata)
+
+            plt.plot(xdata, func(xdata, *popt), 'r-')
+
+            # popt, pcov = curve_fit(func, xdata, ydata,bounds=(0.5,L50))
+
+            # plt.plot(xdata, func(xdata, *popt), 'g-')
