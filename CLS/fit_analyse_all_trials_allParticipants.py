@@ -66,10 +66,11 @@ def nrmse(predictions, targets):
     return np.sqrt(((predictions - targets) ** 2).mean())/len(targets)
 
 
-#%%
-# Find all OAE files ---------------------------------------------
+#%% Find all CLS.xml files
+# Find all CLS.xml files ---------------------------------------------
 # directory_path = os.getcwd()+'\\'
-directory_path = 'c:\\Users\\lenyv\\OneDrive - University College London\\UCL\\Hyperacusis-project\\Python\\Loudness Analysis Scripts\\Participants\\'
+# directory_path = 'c:\\Users\\lenyv\\OneDrive - University College London\\UCL\\Hyperacusis-project\\Python\\Loudness Analysis Scripts\\Participants\\'
+directory_path =os.path.dirname(os.getcwd())+"\\Participants\\"
 extension = ".xml"
 name_pattern =r'(CLS)_(\d{4})\.xml$'  
 matched_files = []
@@ -82,8 +83,6 @@ for root, _, files in os.walk(directory_path):
             matched_files.append(os.path.join(root, file))
 
 ID_pattern = r'\\\w{3}_(\d{4})\.xml$'
-
-# List to store extracted IDs
 
 # Iterate over file paths
 for matched_file in matched_files:
@@ -98,7 +97,7 @@ participantIDs=IDs
 # Print the extracted IDs
 print("IDs in the list:")
 print(IDs)
-#%% 
+#%% Parse XML and import blocks obj
 # Parse XML and import blocks obj-------------
 blockFromCls = parseXML.Cls2dic()
 CLSs=[]
@@ -115,7 +114,7 @@ for ID in participantIDs:
             CLSs[-1]['Blocks']=blocks  
             print("-----> xml data parsed:", str(file))
 
-# %% 
+# %% Perform all the fit
 # Perform all the fit----------------------------------
 
 # min_methods=['MAT','NEL','CG','SLS','TRU']
@@ -138,7 +137,7 @@ for CLS in CLSs:
 
                 print(min_method + '_' + fit_method + ': ' + str(fit)) 
                 block[min_method + '_' + fit_method]=fit
-# %%
+# %% Compute pwlf Bz and RSME
 # Compute pwlf Bz and RSME--------------------------
 # min_methods=['MAT','NEL','CG','SLS','TRU']
 # min_methods=['NEL','CG','SLS','TRU']
@@ -217,7 +216,7 @@ for CLS in CLSs:
 
 
 
-#%%
+#%% Plot min_methods for each block
 # Plot min_methods for each block--------------------------------------------------------
 
 # min_methods=['MAT','NEL','CG','SLS','TRU']
@@ -230,7 +229,7 @@ fit_methods=['BTUX']
 for CLS in CLSs:
     for ii, block in enumerate(CLS['Blocks']):
         for mm, fit_method in enumerate(fit_methods):  
-            print('Block: '+ str(ii)+' fit: '+fit_method)     
+            print('ID: ' + CLS['ID'] +' Block: '+ str(ii)+' fit: '+fit_method)     
             plt.figure()
             plt.plot([10,110],[25,25],':',color='grey')
             plt.scatter(block['Level'], block['CU'],color='black', label='Data')
@@ -247,18 +246,19 @@ for CLS in CLSs:
                 key=min_method + '_' + fit_method
                 plt.plot(block['Pwlf_'+key][0],block['Pwlf_'+key][1],'--',label=min_method+'_'+fit_method+' '+str(round(block['RMSE_'+key],4)))
                 plt.plot(block['PwlfBz_'+key][0],block['PwlfBz_'+key][1],'--',label=min_method+'_'+fit_method+' e:'+str(round(block['NRMSE_'+key],4)) )
-            plt.title('Block: '+ str(ii)+' fit: '+fit_method)
+            plt.title('ID: ' + CLS['ID'] +' Block: '+ str(ii)+' fit: '+fit_method)
             plt.grid()
             plt.legend()
             plt.show()
 
-#%%
+#%% Plot each block in a subplot
 # Plot each block in a subplot -------------------------- 
 
 for CLS in CLSs:
     plt.figure(figsize=(20, 15))
     for ii, block in enumerate(CLS['Blocks']):
-        for mm, fit_method in enumerate(fit_methods):     
+        for mm, fit_method in enumerate(fit_methods):   
+            print('ID: ' + CLS['ID'] +' Block: '+ str(ii)+' fit: '+fit_method)  
             ax = plt.subplot(3, 3, ii + 1)
             ax.plot([10,110],[25,25],':',color='grey')
             ax.scatter(block['Level'], block['CU'],color='black', label='Data')
@@ -273,18 +273,40 @@ for CLS in CLSs:
 
             for ff, min_method in enumerate(min_methods):
                 key=min_method + '_' + fit_method
-                ax.plot(block['Pwlf_'+key][0],block['Pwlf_'+key][1],'--',label=min_method+'_'+fit_method+' '+str(round(block['RMSE_'+key],4)))
-                # ax.plot(block['PwlfBz_'+key][0],block['PwlfBz_'+key][1],'--',label=min_method+'_'+fit_method+' e:'+str(round(block['NRMSE_'+key],4)) )
-            ax.set_title('Max level: '+ str(block['AdaptiveMaxLevel']) + 'dB')
+                # ax.plot(block['Pwlf_'+key][0],block['Pwlf_'+key][1],'--',label=min_method+'_'+fit_method+' '+str(round(block['RMSE_'+key],4)))
+                ax.plot(block['PwlfBz_'+key][0],block['PwlfBz_'+key][1],'--',label=min_method+'_'+fit_method+' e:'+str(round(block['NRMSE_'+key],4)) )
+            ax.set_title(' Block: '+ str(ii) )
             plt.xlabel('Level [dB SPL]')
             plt.ylabel('Categorical Units')
+            plt.suptitle('ID: ' + CLS['ID'] +', fit: '+fit_method + ', Max level: '+ str(block['AdaptiveMaxLevel']) + 'dB', fontsize=20)
             ax.grid()
             ax.legend()
             # ax.show()
 
+#%% get rid of some failed blocks -----------------------------
+# get rid of some failed blocks -----------------------------
+del CLSs[1]['Blocks'][-1]
+
 #%% get rid of the trainning blocks 
-# for CLS in CLSs:
-del CLSs[0]['Blocks'][0]
+# get rid of the trainning blocks 
+# for CLS in CLSs: 
+#     if len(CLS['Blocks']>3):
+#         del CLS['Blocks'][0]
+nTrials=3
+[CLS['Blocks'].pop(0) for CLS in CLSs if len(CLS['Blocks']) > nTrials]
+
+# del CLSs[0]['Blocks'][0]
+
+#%% get rid of 0dB threshold
+#get rid of 0dB threshold
+
+for CLS in CLSs:
+    data=np.array([CLS['All_Levels'], CLS['All_CUs']]).flatten(order='F')
+    pairs = list(zip(CLS['All_Levels'], CLS['All_CUs']))
+    filtered_pairs = [(x, y) for x, y in pairs if y != 0]
+    CLS['filt_All_Levels'] = [pair[0] for pair in filtered_pairs]
+    CLS['filt_All_CUs'] = [pair[1] for pair in filtered_pairs]
+    
 
 #%%
 # Compute mean over each block -------------------------------------------------------------
@@ -346,7 +368,8 @@ fit_methods=['BTUX']
 data=[]
 
 for CLS in CLSs:
-    data=np.array([CLS['All_Levels'], CLS['All_CUs'],]).flatten(order='F')
+    data=np.array([CLS['All_Levels'], CLS['All_CUs']]).flatten(order='F')
+    # data=np.array([CLS['filt_All_Levels'], CLS['filt_All_CUs']]).flatten(order='F')
     for mm, min_method in enumerate(min_methods):
         for ff, fit_method in enumerate(fit_methods):
             fit = np.array(fit_loudness_function.fit_loudness_function(data, fit_method,min_method))  
@@ -379,38 +402,50 @@ for CLS in CLSs:
 #%%
 # Plot means ------------------------------------------------------------
 
-for CLS in CLSs:
-    plt.figure()
-    plt.plot([10,110],[25,25],':',color='grey')
-    plt.plot(CLS['meanPwlf-Artc'][0],CLS['meanPwlf-Artc'][1],'-',label='mean Artc' )
 
+colorList=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2',
+ '#7f7f7f', '#bcbd22', '#17becf']
+
+plt.figure(figsize=(20, 15))
+for ii, CLS in enumerate(CLSs):
+    # plt.figure()
+    ax = plt.subplot(3, 3, ii + 1)
+    ax.plot([10,110],[25,25],':',color='grey')
+    ax.plot(CLS['meanPwlf-Artc'][0],CLS['meanPwlf-Artc'][1],'-',label='mean Artc' )
+    
     for mm, fit_method in enumerate(fit_methods):
         for ff, min_method in enumerate(min_methods):
             key=min_method + '_' + fit_method
-            plt.plot([10,110],[25,25],':',color='grey')
+            ax.plot([10,110],[25,25],':',color='grey')
             # plt.plot(CLS['meanPwlf_'+str(key)][0],CLS['meanPwlf_'+str(key)][1],'-',label='mean '+str(key))
-            plt.plot(CLS['meanPwlfBz_'+str(key)][0],CLS['meanPwlfBz_'+str(key)][1],'-',label='mean Bz '+str(key))
+            ax.plot(CLS['meanPwlfBz_'+str(key)][0],CLS['meanPwlfBz_'+str(key)][1],'-',label='mean Bz '+str(key))
     plt.title('ID: '+CLS['ID']+ ' fit: '+fit_method)
     plt.xlabel('Level [dB SPL]')
     plt.ylabel('Categorical Units')
     plt.grid()
     plt.legend()
-    plt.show()
+    # plt.show()
 
-plt.figure()        
-for CLS in CLSs:
+plt.figure(figsize=(10, 4))  
+   
+for ii, CLS in enumerate(CLSs):
+    ax = plt.subplot(1, 2, 1) 
+    ax.plot([10,110],[25,25],':',color='grey')
+    ax.plot(CLS['meanPwlf-Artc'][0],CLS['meanPwlf-Artc'][1],'-',color=colorList[ii],label=CLS['ID'] )
+    ax.set_title('mean Artc' )
+    ax.grid()
+    ax.legend()
     
-    plt.plot([10,110],[25,25],':',color='grey')
-    plt.plot(CLS['meanPwlf-Artc'][0],CLS['meanPwlf-Artc'][1],'-',label=CLS['ID']+'mean Artc' )
-
     for mm, fit_method in enumerate(fit_methods):
         for ff, min_method in enumerate(min_methods):
             key=min_method + '_' + fit_method
-            plt.plot([10,110],[25,25],':',color='grey')
+            bx = plt.subplot(1, 2, 2)
+            bx.plot([10,110],[25,25],':',color='grey')
             # plt.plot(CLS['meanPwlf_'+str(key)][0],CLS['meanPwlf_'+str(key)][1],'-',label='mean '+str(key))
-            plt.plot(CLS['meanPwlfBz_'+str(key)][0],CLS['meanPwlfBz_'+str(key)][1],'-',label=CLS['ID']+'mean '+str(key))
-
-plt.title('fit: '+fit_method)
+            bx.plot(CLS['meanPwlfBz_'+str(key)][0],CLS['meanPwlfBz_'+str(key)][1],'-',color=colorList[ii],label=CLS['ID'])
+            bx.set_title(' mean  '+str(key))
+            
+# plt.suptitle('fit: '+fit_method)
 plt.xlabel('Level [dB SPL]')
 plt.ylabel('Categorical Units')
 plt.grid()
@@ -460,26 +495,69 @@ plt.show()
 #%%
 # Plot mean vs Refit ------------------------------------------------------------
 
-for CLS in CLSs:
-    plt.figure() 
-    plt.plot([10,110],[25,25],':',color='grey')
-    plt.plot(CLS['meanPwlf-Artc'][0],CLS['meanPwlf-Artc'][1],'-',label=CLS['ID']+' mean Artc' )
+    
+colorList=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2',
+ '#7f7f7f', '#bcbd22', '#17becf']
 
+plt.figure(figsize=(20, 15))
+for ii, CLS in enumerate(CLSs):
+    # plt.figure()
+    ax = plt.subplot(3, 3, ii + 1)
+    ax.plot([10,110],[25,25],':',color='grey')
+    ax.scatter(CLS['All_Levels'], CLS['All_CUs'],color='black', label='Data')
+    ax.plot(CLS['meanPwlf-Artc'][0],CLS['meanPwlf-Artc'][1],'-',label='mean Artc' )
+    
     for mm, fit_method in enumerate(fit_methods):
         for ff, min_method in enumerate(min_methods):
             key=min_method + '_' + fit_method
-            plt.plot([10,110],[25,25],':',color='grey')
+            ax.plot([10,110],[25,25],':',color='grey')
             # plt.plot(CLS['meanPwlf_'+str(key)][0],CLS['meanPwlf_'+str(key)][1],'-',label='mean '+str(key))
-            plt.plot(CLS['meanPwlfBz_'+str(key)][0],CLS['meanPwlfBz_'+str(key)][1],'-',label=CLS['ID']+' mean '+str(key))
-            plt.plot(CLS['Refit_meanPwlfBz_'+str(key)][0],CLS['Refit_meanPwlfBz_'+str(key)][1],'-',label= CLS['ID']+' refit mean Bz '+str(key))
-
-    plt.title('ID: '+CLS['ID']+' refit vs means: '+fit_method)
+            ax.plot(CLS['meanPwlfBz_'+str(key)][0],CLS['meanPwlfBz_'+str(key)][1],'-',label='mean '+str(key))
+            ax.plot(CLS['Refit_meanPwlfBz_'+str(key)][0],CLS['Refit_meanPwlfBz_'+str(key)][1],'-',label= 'refit '+str(key))
+            ax.plot(CLS['filt_Refit_meanPwlfBz_'+str(key)][0],CLS['filt_Refit_meanPwlfBz_'+str(key)][1],'-',label= 'filt_refit '+str(key))
+            
+    plt.title('ID: '+CLS['ID']+ ' fit: '+fit_method)
     plt.xlabel('Level [dB SPL]')
     plt.ylabel('Categorical Units')
     plt.grid()
     plt.legend()
-    plt.show()
+    # plt.show()
 
+plt.figure(figsize=(15, 4))  
+   
+for ii, CLS in enumerate(CLSs):
+    ax = plt.subplot(1, 3, 1) 
+    ax.plot([10,110],[25,25],':',color='grey')
+    ax.plot(CLS['meanPwlf-Artc'][0],CLS['meanPwlf-Artc'][1],'-',color=colorList[ii],label=CLS['ID'] )
+    ax.set_title('mean Artc' )
+    ax.grid()
+    ax.legend()
+    
+    for mm, fit_method in enumerate(fit_methods):
+        for ff, min_method in enumerate(min_methods):
+            key=min_method + '_' + fit_method
+            bx = plt.subplot(1, 3, 2)
+            bx.plot([10,110],[25,25],':',color='grey')
+            bx.plot(CLS['meanPwlfBz_'+str(key)][0],CLS['meanPwlfBz_'+str(key)][1],'-',color=colorList[ii],label=CLS['ID'])
+            bx.set_title(' mean  '+str(key))
+            bx.grid()
+            
+            cx = plt.subplot(1, 3, 3)
+            cx.plot([10,110],[25,25],':',color='grey')
+            cx.plot(CLS['Refit_meanPwlfBz_'+str(key)][0],CLS['Refit_meanPwlfBz_'+str(key)][1],'-',color=colorList[ii],label= 'refit'+str(key))
+            cx.set_title(' Refit  '+str(key))
+            cx.grid()
+            
+# plt.suptitle('fit: '+fit_method)
+plt.xlabel('Level [dB SPL]')
+plt.ylabel('Categorical Units')
+# plt.grid()
+# plt.legend()
+plt.show()
+
+#%% compare slopes and angles
+#
+# get rid of 0dB threshold
 #%%
 
 #Can BTUX be refited???????? it seems it can. it implements rules for when data above 35CU is missing
@@ -488,3 +566,43 @@ for CLS in CLSs:
 # %%
 # look at difference between binaural and mono 
 # plot participant data
+
+#%% 
+# Compute refit, means, pwlf Bz and RSME over gathered block data -----------------------------
+
+
+min_methods=['NEL']
+fit_methods=['BTUX']
+data=[]
+
+for CLS in CLSs:
+    # data=np.array([CLS['All_Levels'], CLS['All_CUs']]).flatten(order='F')
+    data=np.array([CLS['filt_All_Levels'], CLS['filt_All_CUs']]).flatten(order='F')
+    for mm, min_method in enumerate(min_methods):
+        for ff, fit_method in enumerate(fit_methods):
+            fit = np.array(fit_loudness_function.fit_loudness_function(data, fit_method,min_method))  
+            print(min_method + '_' + fit_method + ': ' + str(fit)) 
+            CLS['filt_Refit_inter_slopes_'+str(key)]=fit
+
+            intersect=CLS['filt_Refit_inter_slopes_'+str(key)][0]
+            slopeL=CLS['filt_Refit_inter_slopes_'+str(key)][1]
+            slopeU=CLS['filt_Refit_inter_slopes_'+str(key)][2]
+            
+
+            xu=y2x_lin(yu,intersect,25,slopeU)
+            xl=y2x_lin(yl,intersect,25,slopeL)
+
+            
+            x15=y2x_lin(15,intersect,25,slopeL)
+            x35=y2x_lin(35,intersect,25,slopeU)
+
+            key_plot=key[4:] 
+            keys_plot_list.append(key_plot)
+            
+            CLS['filt_Refit_meanPwlf_'+key]=([np.linspace(xl, xu, num=nPoint),
+                                np.interp(np.linspace(xl, xu, num=nPoint), [xl,intersect,xu], [yl,25,yu])])
+        
+            CLS['filt_Refit_meanPwlfBz_'+key]=[np.linspace(xl, xu, num=nPoint),loudnessFunc([slopeL,slopeU,intersect],np.linspace(xl, xu, num=nPoint))]
+        
+            CLS['filt_Refit_RMSE_'+key]=rmse(CLS['filt_All_CUs'],loudnessFunc([slopeL,slopeU,intersect],CLS['filt_All_Levels']))
+            CLS['filt_Refit_NRMSE_'+key]=nrmse(CLS['filt_All_CUs'],loudnessFunc([slopeL,slopeU,intersect],CLS['filt_All_Levels']))

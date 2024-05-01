@@ -10,9 +10,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import re
 from importlib import reload 
-from fit_psyche.psychometric_curve import PsychometricCurve
-from sklearn.model_selection import RandomizedSearchCV
-from scipy.optimize import curve_fit
 
 
 
@@ -69,28 +66,18 @@ for ID in IDs:
 # %%
 # retrive sentences SNR and plot
 
-# psychometric function
-def func(x, alpha, beta):
-    return 1. / (1 + np.exp( -(x-alpha)/beta ))
 
 for ID in IDs:
     for block in ID['Matrix']['Blocks']:
         # for block in blocks:
-            SNRs=np.array([])
-            trialIntel=np.array([])
+            SNRs=[]
+            trialIntel=[]
             for sentence in block['Sentences']:
                 # for sentence in sentences:
-                SNRs=np.append(SNRs,float(sentence['SNR']))
-                trialIntel=np.append(trialIntel,float(sentence['TrialIntelligibility']))
-                    # SNRs.append(float(sentence['SNR']))
-                    # trialIntel.append(float(sentence['TrialIntelligibility']))
+                    SNRs.append(float(sentence['SNR']))
+                    trialIntel.append(float(sentence['TrialIntelligibility']))
             print("SNR:", str(SNRs))
             print("ITL:", str(trialIntel))
-
-            trialIntel=trialIntel[np.argsort(SNRs)]
-            SNRs=np.sort(SNRs)
-            
-            # trialIntel=trialIntel()
             block['SNRs']=SNRs
             block['TrialIntel']=trialIntel
             if "L50" in block:
@@ -104,58 +91,12 @@ for ID in IDs:
                 print("SRT:")
                 L50=float(block['SRT 0.5'])
                 slope=[]
-            
             plt.figure()
             plt.plot(SNRs,trialIntel,'o')
             plt.plot(L50,0.5,'+')
             if slope:
                 slopeY=np.array([0.4,0.5,0.6])
-                b=0.5-slope*L50
-                slopeX=(slopeY-b)/slope    #problem here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                slopeX=(slope*slopeY) +L50   #problem here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 plt.plot(slopeX,slopeY,'r')
             plt.grid()
-            plt.xlabel('SNR [dB]')
-            plt.ylabel('Intelligibility')
-            plt.title('Block of sentenses')
-
-            # fitting
-
-            # pc = PsychometricCurve(model='wh').fit(SNRs, trialIntel)
-            # pc.plot(SNRs, trialIntel)
-
-            
-            xdata=SNRs
-            ydata=trialIntel
-            popt, pcov = curve_fit(func, xdata, ydata)  
-            plt.plot(xdata, func(xdata, *popt), 'r-')
-            #'GLM'
-
-            # popt, pcov = curve_fit(func, xdata, ydata,bounds=(0.5,L50))
-
-            # plt.plot(xdata, func(xdata, *popt), 'g-')
-
-            # grid = RandomizedSearchCV(PsychometricCurve(), n_jobs=3,
-            #               param_distributions={'model': ['wh', 'logit'],
-            #                                    'guess_rate_lims': [(0.01, 0.05), (0.01, 0.03), (0.03, 0.04)],
-            #                                    'lapse_rate_lims': [(0.01, 0.05), (0.01, 0.03), (0.03, 0.04)]})
-            # grid.fit(x, y)
-            pc = PsychometricCurve(model='wh').fit(xdata, ydata)
-            pc.plot(xdata, ydata)
-
-#%% 
-#process intelligibility per word
-for ID in IDs:
-    for block in ID['Matrix']['Blocks']:
-        # for block in blocks:
-            SNRs=np.array([])
-            trialIntel=np.array([])
-            for sentence in block['Sentences']:
-                target=list(sentence['TargetWords'].split(" "))
-                answer=list(sentence['SelectedWords'].split(" "))
-                score = [(target[i] == answer[i]) for i in range(len(target))]
-            
-            print("target:", str(target))
-            print("answer:", str(answer))
-            print("score:", str(score))
-
-  
+# %%
