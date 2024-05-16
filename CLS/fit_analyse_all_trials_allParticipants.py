@@ -378,12 +378,17 @@ for CLS in CLSs:
 # Plot each block in a subplot -------------------------- 
 
 for CLS in CLSs:
-    plt.figure(figsize=(20, 5))
+    # plt.figure(figsize=(20, 5))
     # plt.figure()
+    num_cols = 3
+    num_rows = (len(CLS['Blocks']) + 2) // 3 
+    fig,axes = plt.subplots(num_rows, num_cols, figsize=(20, 4.5*num_rows))
+    axes = axes.flatten()
+    
+    
     for ii, block in enumerate(CLS['Blocks']):
-        for mm, fit_method in enumerate(fit_methods):   
-            # print('ID: ' + CLS['ID'] +' Block: '+ str(ii)+' fit: '+fit_method)  
-            ax = plt.subplot(1, 3, ii + 1)
+        for mm, fit_method in enumerate(fit_methods): 
+            ax=axes[ii]
             ax.plot([-10,120],[25,25],':',color='grey')
             ax.plot([int(block['AdaptiveMaxLevel']),int(block['AdaptiveMaxLevel'])],[-10,70],'--',color='red', alpha=0.3)
             ax.scatter(block['Level'], block['CU'],color='black', label='Data')
@@ -409,6 +414,9 @@ for CLS in CLSs:
             ax.grid()
             ax.legend()
             # ax.show()
+    for j in range(len(CLS['Blocks']), num_rows * 3):
+        axes[j].axis('off')
+        
     plt.savefig('Figures//CLS_sub_'+CLS['ID'] +'.svg', format="svg")
 
 #%% ---------------------------Compute filtered refit, means, pwlf Bz and RSME over gathered block data
