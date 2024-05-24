@@ -72,22 +72,31 @@ def nrmse(predictions, targets):
 # directory_path = 'c:\\Users\\lenyv\\OneDrive - University College London\\UCL\\Hyperacusis-project\\Python\\Loudness Analysis Scripts\\Participants\\'
 directory_path =os.path.dirname(os.getcwd())+"\\Participants\\"
 extension = ".xml"
-name_pattern =r'(CLS)_(\d{4})\.xml$'  
+# name_pattern =r'(CLS)_(\d{4})\.xml$'  
+# name_pattern =r'(\d{4})_(CLS)\.xml$'
+# name_pattern = re.compile(r'^((CLS)_(\d{4})\.xml|(\d{4})_(CLS)\.xml)$')
+name_pattern = re.compile(r'^(CLS_\d{4}\.xml|\d{4}_CLS\.xml)$')
 matched_files = []
 IDs=[]
 
 for root, _, files in os.walk(directory_path):
     
     for file in files:
-        if file.endswith(extension) and re.match(name_pattern, file):
+        if file.endswith(extension) and name_pattern.match( file):
             matched_files.append(os.path.join(root, file))
 
-ID_pattern = r'\\\w{3}_(\d{4})\.xml$'
+ID_pattern1 = re.compile(r'\\\w{3}_(\d{4})\.xml$')
+ID_pattern2 = re.compile(r'\\(\d{4})_\w{3}\.xml$')
+
+
+# ID_pattern = (r'\\\w{3}_(\d{4})\.xml$' | '\\w{3}_(\d{4})\.xml$')
+# ID_pattern = re.compile(r'^(\\?\w{3}_\d{4}\.xml|\\?\d{4}_\w{3}\.xml)$')
+
 
 # Iterate over file paths
 for matched_file in matched_files:
     # Search for pattern in each file path
-    match = re.search(ID_pattern, matched_file)
+    match = ID_pattern1.search( matched_file) or ID_pattern2.search( matched_file)
     if match:
         ID = match.group(1)
         if ID not in IDs:
@@ -97,6 +106,7 @@ participantIDs=IDs
 # Print the extracted IDs
 print("IDs in the list:")
 print(IDs)
+print(matched_files)
 #%% ---------------------------Parse XML and import blocks obj
 # Parse XML and import blocks obj-------------
 blockFromCls = parseXML.Cls2dic()
@@ -116,7 +126,9 @@ for ID in participantIDs:
 
 #%% ---------------------------get rid of some failed blocks -----------------------------
 # get rid of some failed blocks -----------------------------
+
 del CLSs[1]['Blocks'][-1]
+del CLSs[2]['Blocks'][-1]
 
 #%% ---------------------------get rid of the trainning blocks -----------------------------
 # get rid of the trainning blocks -----------------------------
@@ -406,7 +418,7 @@ for CLS in CLSs:
                 # ax.plot(block['Pwlf_'+key][0],block['Pwlf_'+key][1],'--',label=min_method+'_'+fit_method+' '+str(round(block['RMSE_'+key],4)))
                 ax.plot(block['PwlfBz_'+key][0],block['PwlfBz_'+key][1],'--',label=min_method+'_'+fit_method+' e:'+str(round(block['NRMSE_'+key],4)) )
             ax.set_title(' Block: '+ str(ii) )
-            ax.set_xlim(-2,100)
+            # ax.set_xlim(-2,100)
             ax.set_ylim(-2,52)
             plt.xlabel('Level [dB SPL]')
             plt.ylabel('Categorical Units')
@@ -583,7 +595,7 @@ for ii, CLS in enumerate(CLSs):
     plt.title('ID: '+CLS['ID'])
     ax.set_xlabel('Level [dB SPL]')
     ax.set_ylabel('Categorical Units')
-    ax.set_xlim(-2,100)
+    # ax.set_xlim(-2,100)
     ax.set_ylim(-2,52)
     plt.grid()
     plt.legend()
@@ -624,7 +636,7 @@ for n, param in enumerate(param_list):
     ax.legend()
     ax.set_xlabel('Level [dB SPL]')
     ax.set_ylabel('Categorical Units')
-    ax.set_xlim(-2,100)
+    # ax.set_xlim(-2,100)
     ax.set_ylim(-2,52)
 plt.suptitle('Means vs Refits',size=15)
 plt.tight_layout()
