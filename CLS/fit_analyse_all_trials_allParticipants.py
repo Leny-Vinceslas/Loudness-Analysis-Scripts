@@ -166,13 +166,13 @@ for CLS in CLSs:
 # Perform all the fit per block----------------------------------
 
 # min_methods=['MAT','NEL','CG','SLS','TRU']
-# min_methods=['NEL','CG','SLS','TRU']
-# # min_methods=['CG']
 # fit_methods=['BX','BY','BTX','BTUX','BTUY','BTPX']
 min_methods=['NEL']
 fit_methods=['BTUX']
+fit_methods.append('BTX')
+# we can change/delete the min_method to simplify and integrate the Artc <-------------------
 data=[]
-# blocks=blocks[3:5]
+
 for CLS in CLSs:
     maxLoudness=[]
     for ii, block in enumerate(CLS['Blocks']):
@@ -188,12 +188,13 @@ for CLS in CLSs:
                 print(min_method + '_' + fit_method + ': ' + str(fit)) 
                 block[min_method + '_' + fit_method]=fit
     CLS['AdaptiveMaxLevel']=maxLoudness
+    
+conditions=['Artc']
+for mm, min_method in enumerate(min_methods):
+    for ff, fit_method in enumerate(fit_methods):
+        conditions.append(min_method + '_' + fit_method)
 # %% --------------------------Compute pwlf Bz and RSME -----------------------------
 # Compute pwlf Bz and RSME --------------------------
-# min_methods=['MAT','NEL','CG','SLS','TRU']
-# min_methods=['NEL','CG','SLS','TRU']
-# min_methods=['NEL']
-# fit_methods=['BX','BY','BTX','BTUX','BTUY','BTPX']
 
 markers=["o","*","+","x","v","^","<",">","s","p","P","h","H"]
 
@@ -204,9 +205,13 @@ for CLS in CLSs:
     temp2_slopeL=[]
     temp2_slopeU=[]
     temp2_intersect=[]
+    # temp={}
+    temp=[[[],[],[]],[[],[],[]],[[],[],[]]]
+    
 
     for ii, block in enumerate(CLS['Blocks']):
         nPoint=100
+        collection_conditions=['Artc']
         
         try:
             nPointBez=len(block['Data_fit_level'])
@@ -224,10 +229,10 @@ for CLS in CLSs:
             x35=y2x_lin(35,intersect,25,slopeU)
 
             #Interpolate from the 3 points
-            block['Pwlf-Artc']=[np.linspace(xl, xu, num=nPoint),
+            block['Pwlf_Artc']=[np.linspace(xl, xu, num=nPoint),
                                 np.interp(np.linspace(xl, xu, num=nPoint), [xl,intersect,xu], [yl,25,yu])]
 
-            block['PwlfBz-Artc']=[np.linspace(xl, xu, num=nPoint),loudnessFunc([slopeL,slopeU,intersect],np.linspace(xl, xu, num=nPoint))]
+            block['PwlfBz_Artc']=[np.linspace(xl, xu, num=nPoint),loudnessFunc([slopeL,slopeU,intersect],np.linspace(xl, xu, num=nPoint))]
             
             block['RMSE_Artc']=rmse(block['CU'],loudnessFunc([slopeL,slopeU,intersect],(block['Level'])))
             block['NRMSE_Artc']=nrmse(block['CU'],loudnessFunc([slopeL,slopeU,intersect],(block['Level'])))
@@ -248,11 +253,13 @@ for CLS in CLSs:
         dataPlotsBz=[]
         
         
+        
         for mm, min_method in enumerate(min_methods):
 
             for ff, fit_method in enumerate(fit_methods):
                 key=min_method + '_' + fit_method
-
+                
+                
                 intersect=block[key][0]
                 slopeL=block[key][1]
                 slopeU=block[key][2]
@@ -278,13 +285,24 @@ for CLS in CLSs:
                 # block['STD_'+key]=np.std(block['CU'],loudnessFunc([slopeL,slopeU,intersect],block['Level']))
 
                 #Compute average intercept and slopes 
-                temp2_slopeL.append(block[str(key)][1])
-                temp2_slopeU.append(block[str(key)][2])
-                temp2_intersect.append(block[str(key)][0])
+                # temp2_slopeL.append(block[str(key)][1])
+                # temp2_slopeU.append(block[str(key)][2])
+                # temp2_intersect.append(block[str(key)][0])
+                # temp[key+'_slopeL'].append(block[str(key)][1])
+                # temp[key+'_slopeU'].append(block[str(key)][2])
+                # temp[key+'_intersect'].append(block[str(key)][0])
+                
+                temp[ff][1].append(block[str(key)][1])
+                temp[ff][2].append(block[str(key)][2])
+                temp[ff][0].append(block[str(key)][0])
+                
+                collection_conditions.append(key)
     CLS['Artc_inter_slopes']=[np.mean(temp_intersect), np.mean(temp_slopeL), np.mean(temp_slopeU)]
-    CLS[str(key)+'_inter_slopes']=[np.mean(temp2_intersect), np.mean(temp2_slopeL), np.mean(temp2_slopeU)]
-
-    collection_conditions=['Artc',str(key)]
+    # CLS[str(key)+'_inter_slopes']=[np.mean(temp2_intersect), np.mean(temp2_slopeL), np.mean(temp2_slopeU)]
+    CLS['NEL_BTUX_inter_slopes']=[np.mean(temp[0][0]), np.mean(temp[0][1]), np.mean(temp[0][2])]
+    CLS['NEL_BTX_inter_slopes']=[np.mean(temp[1][0]), np.mean(temp[1][1]), np.mean(temp[1][2])]
+    
+    # collection_conditions=['Artc',str(key)]
     for condition in collection_conditions:
         intersect=CLS[condition+'_inter_slopes'][0]
         slopeL=CLS[condition+'_inter_slopes'][1]
@@ -314,8 +332,8 @@ for CLS in CLSs:
 # Compute refit, means, pwlf Bz and RSME over gathered block data -----------------------------
 
 
-min_methods=['NEL']
-fit_methods=['BTUX']
+# min_methods=['NEL']
+# fit_methods=['BTUX']
 data=[]
 
 for CLS in CLSs:
@@ -350,42 +368,6 @@ for CLS in CLSs:
             CLS['Refit_RMSE_'+key]=rmse(CLS['All_CUs'],loudnessFunc([slopeL,slopeU,intersect],CLS['All_Levels']))
             CLS['Refit_NRMSE_'+key]=nrmse(CLS['All_CUs'],loudnessFunc([slopeL,slopeU,intersect],CLS['All_Levels']))
 
-
-#%% ---------------------------Plot min_methods for each block ----------------------------------------------------------
-# Plot min_methods for each block--------------------------------------------------------
-
-# min_methods=['MAT','NEL','CG','SLS','TRU']
-# min_methods=['NEL']
-# fit_methods=['BX','BY','BTX','BTUX','BTUY','BTPX']
-
-min_methods=['NEL']
-fit_methods=['BTUX']
-
-for CLS in CLSs:
-    for ii, block in enumerate(CLS['Blocks']):
-        for mm, fit_method in enumerate(fit_methods):  
-            print('ID: ' + CLS['ID'] +' Block: '+ str(ii)+' fit: '+fit_method)     
-            plt.figure()
-            plt.plot([10,110],[25,25],':',color='grey')
-            plt.scatter(block['Level'], block['CU'],color='black', label='Data')
-            try:
-                plt.plot(block['Pwlf-Artc'][0],block['Pwlf-Artc'][1],'-',label='Artc'+' '+str(round(block['RMSE_Artc'],4)))
-            
-                plt.plot(block['PwlfBz-Artc'][0],block['PwlfBz-Artc'][1],'-',label='Artc'+' e:'+str(round(block['NRMSE_Artc'],4)))
-            
-            except:
-                print('Auralec data missing for plot')
-
-
-            for ff, min_method in enumerate(min_methods):
-                key=min_method + '_' + fit_method
-                plt.plot(block['Pwlf_'+key][0],block['Pwlf_'+key][1],'--',label=min_method+'_'+fit_method+' '+str(round(block['RMSE_'+key],4)))
-                plt.plot(block['PwlfBz_'+key][0],block['PwlfBz_'+key][1],'--',label=min_method+'_'+fit_method+' e:'+str(round(block['NRMSE_'+key],4)) )
-            plt.title('ID: ' + CLS['ID'] +' Block: '+ str(ii)+' fit: '+fit_method)
-            plt.grid()
-            plt.legend()
-            plt.show()
-
 #%% ---------------------------Plot each block in a subplot -----------------------------
 # Plot each block in a subplot -------------------------- 
 
@@ -399,18 +381,18 @@ for CLS in CLSs:
     
     
     for ii, block in enumerate(CLS['Blocks']):
+        ax=axes[ii]
+        ax.grid()
+        ax.plot([-10,120],[25,25],':',color='grey')
+        ax.plot([int(block['AdaptiveMaxLevel']),int(block['AdaptiveMaxLevel'])],[-10,70],'--',color='red', alpha=0.3)
+        ax.scatter(block['Level'], block['CU'],color='black', label='Data')
+        try:
+            # ax.plot(block['Pwlf-Artc'][0],block['Pwlf-Artc'][1],'-',label='Artc'+' '+str(round(block['RMSE_Artc'],4)))
+            ax.plot(block['PwlfBz_Artc'][0],block['PwlfBz_Artc'][1],'-',label='Artc'+' e:'+str(round(block['NRMSE_Artc'],4)))
+        except:
+            print('Auritec data missing for plot')
         for mm, fit_method in enumerate(fit_methods): 
-            ax=axes[ii]
-            ax.plot([-10,120],[25,25],':',color='grey')
-            ax.plot([int(block['AdaptiveMaxLevel']),int(block['AdaptiveMaxLevel'])],[-10,70],'--',color='red', alpha=0.3)
-            ax.scatter(block['Level'], block['CU'],color='black', label='Data')
-            try:
-                # ax.plot(block['Pwlf-Artc'][0],block['Pwlf-Artc'][1],'-',label='Artc'+' '+str(round(block['RMSE_Artc'],4)))
             
-                ax.plot(block['PwlfBz-Artc'][0],block['PwlfBz-Artc'][1],'-',label='Artc'+' e:'+str(round(block['NRMSE_Artc'],4)))
-            
-            except:
-                print('Auralec data missing for plot')
 
 
             for ff, min_method in enumerate(min_methods):
@@ -423,20 +405,18 @@ for CLS in CLSs:
             plt.xlabel('Level [dB SPL]')
             plt.ylabel('Categorical Units')
             plt.suptitle('ID: ' + CLS['ID'] +', Max level: '+ str(block['AdaptiveMaxLevel']) + 'dB', fontsize=10)
-            ax.grid()
+            
             ax.legend()
-            # ax.show()
     for j in range(len(CLS['Blocks']), num_rows * 3):
         axes[j].axis('off')
+    
+    
         
     plt.savefig('Figures//CLS_sub_'+CLS['ID'] +'.svg', format="svg")
 
 #%% ---------------------------Compute filtered refit, means, pwlf Bz and RSME over gathered block data
 # Compute filtered refit, means, pwlf Bz and RSME over gathered block data -----------------------------
 
-
-min_methods=['NEL']
-fit_methods=['BTUX']
 data=[]
 
 for CLS in CLSs:
@@ -482,7 +462,7 @@ for ii, CLS in enumerate(CLSs):
     # plt.figure()
     ax = plt.subplot(3, 3, ii + 1)
     ax.plot([10,110],[25,25],':',color='grey')
-    ax.plot(CLS['meanPwlf_Artc'][0],CLS['meanPwlf_Artc'][1],'-',label='mean Artc' )
+    ax.plot(CLS['meanPwlfBz_Artc'][0],CLS['meanPwlfBz_Artc'][1],'-',label='mean Artc' )
     
     for mm, fit_method in enumerate(fit_methods):
         for ff, min_method in enumerate(min_methods):
@@ -572,8 +552,8 @@ colorList=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e
 # param_list=['meanPwlfBz_Artc','meanPwlfBz_NEL_BTUX','Refit_meanPwlfBz_NEL_BTUX','filt_Refit_meanPwlfBz_NEL_BTUX']
 # name_param_list=['Artc','BTUX','Refit_BTUX','filt_Refit_BTUX']
 
-param_list=['meanPwlfBz_Artc','meanPwlfBz_NEL_BTUX','Refit_meanPwlfBz_NEL_BTUX']
-name_param_list=['Artc','BTUX','Refit_BTUX']
+param_list=['meanPwlfBz_Artc','meanPwlfBz_NEL_BTUX','Refit_meanPwlfBz_NEL_BTUX','meanPwlfBz_NEL_BTX','Refit_meanPwlfBz_NEL_BTX']
+name_param_list=['Artc mean','BTUX mean','Refit_BTUX','BTX mean','Refit_BTX']
 
 plt.figure(figsize=(13, 7))
 for ii, CLS in enumerate(CLSs):
@@ -588,8 +568,8 @@ for ii, CLS in enumerate(CLSs):
         for ff, min_method in enumerate(min_methods):
             key=min_method + '_' + fit_method
             # plt.plot(CLS['meanPwlf_'+str(key)][0],CLS['meanPwlf_'+str(key)][1],'-',label='mean '+str(key))
-            ax.plot(CLS['meanPwlfBz_'+str(key)][0],CLS['meanPwlfBz_'+str(key)][1],'-',label='BTUX'+' e:'+str(round(CLS['NRMSE_'+key],4)))
-            ax.plot(CLS['Refit_meanPwlfBz_'+str(key)][0],CLS['Refit_meanPwlfBz_'+str(key)][1],'--',label= 'refit_BTUX '+' e:'+str(round(CLS['Refit_NRMSE_'+key],4)))
+            ax.plot(CLS['meanPwlfBz_'+str(key)][0],CLS['meanPwlfBz_'+str(key)][1],'-',label='mean_'+fit_method+' e:'+str(round(CLS['NRMSE_'+key],4)))
+            ax.plot(CLS['Refit_meanPwlfBz_'+str(key)][0],CLS['Refit_meanPwlfBz_'+str(key)][1],'--',label= 'refit_' +fit_method+' e:'+str(round(CLS['Refit_NRMSE_'+key],4)))
             # ax.plot(CLS['filt_Refit_meanPwlfBz_'+str(key)][0],CLS['filt_Refit_meanPwlfBz_'+str(key)][1],'--',label= 'filt_refit_BTUX '+' e:'+str(round(CLS['filt_Refit_NRMSE_'+key],4)))
             
     plt.title('ID: '+CLS['ID'])
@@ -623,10 +603,10 @@ plt.savefig('Figures//CLS_sub_mean_refit_perID.svg', format="svg",dpi=300, bbox_
 
 # param_list=['Refit_meanPwlfBz_NEL_BTUX']
 # name_param_list=['Refit_BTUX']
-name_param_list=['Artc mean','BTUX mean','Refit_BTUX']
-plt.figure(figsize=(13, 4))     
+# name_param_list=['Artc mean','BTUX mean','Refit_BTUX','BTX mean','Refit_BTX']
+plt.figure(figsize=(13, 4*2))     
 for n, param in enumerate(param_list):
-    ax = plt.subplot(1, 3, n + 1)
+    ax = plt.subplot(2, 3, n + 1)
     ax.plot([-2,110],[25,25],':',color='grey')
 
     for ii,CLS in enumerate(CLSs):
@@ -642,54 +622,7 @@ plt.suptitle('Means vs Refits',size=15)
 plt.tight_layout()
 plt.savefig('Figures//CLS_sub_mean_refit.svg', format="svg",dpi=300, bbox_inches = "tight")
 
-# plt.figure(figsize=(13, 10))  
-# for ii, CLS in enumerate(CLSs):
-#     ax = plt.subplot(2, 2, 1) 
-#     ax.plot([10,110],[25,25],':',color='grey')
-#     ax.plot(CLS['meanPwlfBz_Artc'][0],CLS['meanPwlfBz_Artc'][1],'-',color=colorList[ii],label=CLS['ID'] )
-#     ax.set_title('mean Artc' )
-#     ax.grid()
-#     ax.legend()
-    
-#     for mm, fit_method in enumerate(fit_methods):
-#         for ff, min_method in enumerate(min_methods):
-#             key=min_method + '_' + fit_method
-#             bx = plt.subplot(2, 2, 2)
-#             bx.plot([10,110],[25,25],':',color='grey')
-#             bx.plot(CLS['meanPwlfBz_'+str(key)][0],CLS['meanPwlfBz_'+str(key)][1],'-',color=colorList[ii],label=CLS['ID'])
-#             bx.set_title(' mean  '+str(key))
-#             bx.grid()
-#             bx.set_xlabel('Level [dB SPL]')
-#             bx.set_ylabel('Categorical Units')
-            
-#             cx = plt.subplot(2, 2, 3)
-#             cx.plot([10,110],[25,25],':',color='grey')
-#             cx.plot(CLS['Refit_meanPwlfBz_'+str(key)][0],CLS['Refit_meanPwlfBz_'+str(key)][1],'-',color=colorList[ii],label= 'refit'+str(key))
-#             cx.set_title(' Refit  '+str(key))
-#             cx.grid()
-#             cx.set_xlabel('Level [dB SPL]')
-#             cx.set_ylabel('Categorical Units')
-
-#             dx = plt.subplot(2, 2, 4)
-#             dx.plot([10,110],[25,25],':',color='grey')
-#             dx.plot(CLS['filt_Refit_meanPwlfBz_'+str(key)][0],CLS['filt_Refit_meanPwlfBz_'+str(key)][1],'-',color=colorList[ii],label= 'refit'+str(key))
-#             dx.set_title(' filt_Refit  '+str(key))
-#             dx.grid()
-
-# ax.set_xlabel('Level [dB SPL]')
-# ax.set_ylabel('Categorical Units')
-# bx.set_xlabel('Level [dB SPL]')
-# bx.set_ylabel('Categorical Units')            
-# dx.set_xlabel('Level [dB SPL]')
-# dx.set_ylabel('Categorical Units')
-# cx.set_xlabel('Level [dB SPL]')
-# cx.set_ylabel('Categorical Units')            
-# # plt.suptitle('fit: '+fit_method)
-# # plt.xlabel('Level [dB SPL]')
-# # plt.ylabel('Categorical Units')
-# # plt.grid()
-# # plt.legend()
-# plt.show()
+#
 
 #%% compare slopes and angles and error
 #
